@@ -12,3 +12,63 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+
+model User {
+  userid Int @id @default(autoincrement())
+  username String
+  email String
+  avatar String
+  teamMembers Team[] @relation("teamMembers")
+  role String
+  matchplayed Int
+  wonmatch Int
+  loses Int
+  tied Int
+}
+
+model Team {
+  teamid Int @id @default(autoincrement())
+  name String
+  punchline String
+  logo String
+  members User[] @relation("teamMembers")
+  rating Int
+  feedbacks String
+  won Int
+  lost Int 
+  tie Int
+  category Sportcategory @relation(fields: [categoryId] , references: [sportcategoryid])
+  categoryId Int
+  createdmatch Match[]
+  joinedMatch Match[] @relation("teamJoinedmatch")
+  winningteam Match[] @relation("winningteam")
+  loosedMatch Match[] @relation("loosedMatch")
+}
+
+
+model Sportcategory {
+  sportcategoryid Int @id @default(autoincrement())
+  name String
+  team Team[]
+}
+
+
+
+model Match {
+  matchid Int @id @default(autoincrement())
+  createdTeam Team @relation(fields: [createdteamId] , references: [teamid])
+  createdteamId Int
+  Joinedteam Team @relation("teamJoinedmatch" , fields: [joinedteamid] , references: [teamid])
+  joinedteamid Int
+  location String
+  time DateTime
+  bet Int
+  status String
+  winningteam Team @relation("winningteam" , fields: [winningteamid] , references: [teamid])
+  winningteamid Int
+  looserteam Team @relation("loosedMatch" , fields: [looserteamid] , references: [teamid])
+  looserteamid Int
+
+}
