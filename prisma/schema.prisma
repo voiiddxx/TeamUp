@@ -17,6 +17,7 @@ datasource db {
 
 model User {
   userid Int @id @default(autoincrement())
+  clerkId String
   username String
   email String
   avatar String
