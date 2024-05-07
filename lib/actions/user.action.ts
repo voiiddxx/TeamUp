@@ -24,6 +24,7 @@ export const CreateUserAction = async({data}: CreateUserParams)=>{
                 role:'Player',
                 tied:0,
                 wonmatch:0,
+                clerkId:data.clerkId
             }
         });
         if(!userRes){
@@ -39,10 +40,33 @@ export const CreateUserAction = async({data}: CreateUserParams)=>{
 
 
 
+// server action for getting the user profile 
+
+export const GetUserProfileAction = async(userId:number)=>{
+    try {
+        if(!userId){
+            return JSON.parse(JSON.stringify({message:"No userid found" , status:400}));
+        }
+        const res = await prisma.user.findFirst({
+            where:{
+                userid:userId
+            }
+        });
+        if(!res){
+            return JSON.parse(JSON.stringify({message:"Error while getting user profile" , status:401}));
+        }
+        return JSON.parse(JSON.stringify({data:res , status:200}));
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+
+
 
 // server action for completing the profile
-
-
 export const UpdateProfileAction = async({data , userId}:UpdateUserParams)=>{
     try {
         if(!userId) return JSON.parse(JSON.stringify({message:"No id found" , status:404}));
