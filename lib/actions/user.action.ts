@@ -1,6 +1,6 @@
 "use server"
 
-import { CreateUserParams } from "@/types";
+import { CreateUserParams, UpdateUserParams } from "@/types";
 import { PrismaClient } from '@prisma/client'
 
 
@@ -16,9 +16,9 @@ export const CreateUserAction = async({data}: CreateUserParams)=>{
         }
         const userRes = await prisma.user.create({
             data:{
-                username:'nbjb',
-                avatar:'nn ',
-                email:'mlm',
+                username:data.username,
+                avatar:data.avatar,
+                email:data.email,
                 loses:0,
                 matchplayed:0,
                 role:'Player',
@@ -43,9 +43,33 @@ export const CreateUserAction = async({data}: CreateUserParams)=>{
 // server action for completing the profile
 
 
-export const UpdateProfileAction = async()=>{
+export const UpdateProfileAction = async({data , userId}:UpdateUserParams)=>{
     try {
+        if(!userId) return JSON.parse(JSON.stringify({message:"No id found" , status:404}));
+        const UserForUpdation = await prisma.user.findFirst({
+            where:{
+                userid:userId
+            }
+        });
+        if(!UserForUpdation){
+            return JSON.parse(JSON.stringify({message:"No user found" , status:400}));
+        }
+
+        const updateData = {
+            avatar:data.avatar || UserForUpdation.avatar,
+            loses:data.loses || UserForUpdation.loses ,
+            role:data.role || UserForUpdation.role,
+            matchplayed: data.matchPlayed || UserForUpdation.matchplayed,
+            wonmatch:data.wonmatch || UserForUpdation.wonmatch
+        } 
         
+        // const updatedUser = await prisma.user.update({
+        //     where:{
+        //         userid:userId,
+        //     }, data:{
+        //         ...data
+        //     }
+        // })
     } catch (error) {
         console.log(error);
         
