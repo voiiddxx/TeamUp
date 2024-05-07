@@ -63,6 +63,25 @@ export const GetUserProfileAction = async(userId:number)=>{
 }
 
 
+// server action for getting the user based on clerkId 
+
+export const gerUserasPerClerkId = async(clerkId:string)=>{
+    if(!clerkId){
+        return JSON.parse(JSON.stringify({message:"No clerkId found" , status:400}));
+    }
+    const res = await prisma.user.findFirst({
+        where:{
+            clerkId:clerkId
+        }
+    });
+    if(!res){
+        return JSON.parse(JSON.stringify({message:"Some issue occured while getting user" , status:401}));
+    }
+    
+    return JSON.parse(JSON.stringify({data:res , status:200}))
+}
+
+
 
 
 
