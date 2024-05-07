@@ -16,7 +16,7 @@ export type UpdateUserParams = {
         loses?: number,
         avatar?: string,
         wonmatch?: number,
-        role?: number,
+        role?: string,
         matchPlayed?: number
     }
 }

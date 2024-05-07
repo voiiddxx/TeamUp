@@ -63,13 +63,17 @@ export const UpdateProfileAction = async({data , userId}:UpdateUserParams)=>{
             wonmatch:data.wonmatch || UserForUpdation.wonmatch
         } 
         
-        // const updatedUser = await prisma.user.update({
-        //     where:{
-        //         userid:userId,
-        //     }, data:{
-        //         ...data
-        //     }
-        // })
+       const userUpdated = await prisma.user.update({
+        where:{
+            userid:userId,
+        },
+        data:updateData
+       });
+
+       if(!userUpdated){
+        return JSON.parse(JSON.stringify({message:"Issue while updating the user" , status:400}));
+       }
+       return JSON.parse(JSON.stringify({data:userUpdated , status:200}));
     } catch (error) {
         console.log(error);
         
