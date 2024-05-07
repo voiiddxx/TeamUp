@@ -21,11 +21,11 @@ model User {
   email String
   avatar String
   teamMembers Team[] @relation("teamMembers")
-  role String
-  matchplayed Int
+  role String?
+  matchplayed Int?
   wonmatch Int
-  loses Int
-  tied Int
+  loses Int?
+  tied Int?
 }
 
 model Team {
@@ -70,5 +70,14 @@ model Match {
   winningteamid Int
   looserteam Team @relation("loosedMatch" , fields: [looserteamid] , references: [teamid])
   looserteamid Int
+  invites Invite[]
+}
 
+
+model Invite {
+  inviteid Int @id @default(autoincrement())
+  message String
+  inviteFormatch Match @relation( fields: [inviteformatchid] , references: [matchid])
+  inviteformatchid Int
+  
 }
