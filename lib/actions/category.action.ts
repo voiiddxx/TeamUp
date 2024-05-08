@@ -39,7 +39,8 @@ export const GetCategoryWithId = async (categoryId:number)=>{
                 sportcategoryid:categoryId
             },
             include:{
-                team:true
+                team:true,
+                match:true
             }
         });
         if(!categoryRes){
