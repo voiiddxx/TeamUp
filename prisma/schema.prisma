@@ -35,11 +35,11 @@ model Team {
   punchline String
   logo String
   members User[] @relation("teamMembers")
-  rating Int
-  feedbacks String
-  won Int
-  lost Int 
-  tie Int
+  rating Int?
+  feedbacks String[]
+  won Int?
+  lost Int? 
+  tie Int?
   category Sportcategory @relation(fields: [categoryId] , references: [sportcategoryid])
   categoryId Int
   createdmatch Match[]
@@ -53,6 +53,7 @@ model Sportcategory {
   sportcategoryid Int @id @default(autoincrement())
   name String
   team Team[]
+  match Match[]
 }
 
 
@@ -67,6 +68,8 @@ model Match {
   time DateTime
   bet Int
   status String
+  Category Sportcategory @relation(fields: [matchCategoryId] , references: [sportcategoryid])
+  matchCategoryId Int
   winningteam Team @relation("winningteam" , fields: [winningteamid] , references: [teamid])
   winningteamid Int
   looserteam Team @relation("loosedMatch" , fields: [looserteamid] , references: [teamid])
