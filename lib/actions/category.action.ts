@@ -34,7 +34,18 @@ export const GetCategoryWithId = async (categoryId:number)=>{
         return JSON.parse(JSON.stringify({message:"No Data found" , status:400}));
     }
     try {
-        
+        const categoryRes = await prisma.sportcategory.findFirst({
+            where:{
+                sportcategoryid:categoryId
+            },
+            include:{
+                team:true
+            }
+        });
+        if(!categoryRes){
+            return JSON.parse(JSON.stringify({message:"Some error found" , status:401}));   
+        }
+        return JSON.parse(JSON.stringify({data:categoryRes , status:200}));
     } catch (error) {
         
     }
