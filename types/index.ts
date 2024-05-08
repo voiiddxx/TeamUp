@@ -21,3 +21,12 @@ export type UpdateUserParams = {
         matchPlayed?: number
     }
 }
+
+
+export type createTeamParams = {
+    data:{
+        name:string
+        logo:string
+        caption:string
+    }
+}
