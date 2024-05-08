@@ -26,3 +26,16 @@ export const CreateCategoryAction = async ({data}:CreateCategoryParams)=>{
         
     }
 }
+
+// server action for getting the specific category based on id 
+
+export const GetCategoryWithId = async (categoryId:number)=>{
+    if(!categoryId){
+        return JSON.parse(JSON.stringify({message:"No Data found" , status:400}));
+    }
+    try {
+        
+    } catch (error) {
+        
+    }
+}
