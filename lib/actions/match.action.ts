@@ -36,3 +36,14 @@ export const CreatMatchAction = async ({data}:CreateMacthParams)=>{
     }
     return JSON.parse(JSON.stringify({data:matchRes , status:200}));
 }
+
+
+
+// server action for gettig the match based on id
+
+export const GetMatchWithIdAction  = async (matchId : number)=>{
+    if(!matchId){
+        return JSON.parse(JSON.stringify({message:"No Data found" , staus:400}));
+    }
+    
+}
