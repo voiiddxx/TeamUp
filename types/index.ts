@@ -30,3 +30,9 @@ export type createTeamParams = {
         caption:string
     }
 }
+
+export type CreateCategoryParams = {
+    data:{
+        name:string
+    }
+}
