@@ -36,3 +36,10 @@ export type CreateCategoryParams = {
         name:string
     }
 }
+
+export type CreateMacthParams = {
+   data:{
+    location:string
+    date: Date
+   }
+}
