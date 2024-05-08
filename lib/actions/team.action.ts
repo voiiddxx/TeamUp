@@ -39,3 +39,37 @@ export const CreateTeamAction = async ({data}:createTeamParams)=>{
         
     }
 }
+
+
+// server action for getting the team with teamId
+
+export const getTeamWithTeamIdAction = async (teamId: number)=>{
+
+    if(!teamId){
+        return JSON.parse(JSON.stringify({message:"No TeamId Found" , status:400}))
+    }
+    try {
+        const teamRes = await prisma.team.findFirst({
+            where:{
+                teamid:teamId
+            },
+            include:{
+                category:true,
+                createdmatch:true,
+                joinedMatch:true,
+                loosedMatch:true,
+                members:true,
+                winningteam:true,
+            }
+        });
+
+        if(!teamRes) {
+            return JSON.parse(JSON.stringify({message:"No Team Found" , status:401}));
+        }
+        return JSON.parse(JSON.stringify({data:teamRes , status:200}));
+
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
