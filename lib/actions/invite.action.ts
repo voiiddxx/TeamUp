@@ -18,9 +18,15 @@ export const CreateMatchInvitationAction = async ({data}:CreateInviteParams)=>{
     try {
         const inviteRes = await prisma.invite.create({
             data:{
-                
+                message:"this is message for invitation",
+                inviteformatchid:2,
+                invitingTeamId:2
             }
-        })    
+        });
+        if(!inviteRes){
+            return JSON.parse(JSON.stringify({message:"Some issue while sending the invitation" , status:400}));
+        }
+        return JSON.parse(JSON.stringify({data:inviteRes , status:200}));
     } catch (error) {
         console.log(error);
         
