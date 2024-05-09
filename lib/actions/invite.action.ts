@@ -32,3 +32,19 @@ export const CreateMatchInvitationAction = async ({data}:CreateInviteParams)=>{
         
     }
 }
+
+
+
+// adding server action for geting the invitation for particular match
+
+export const getInvitationAspermatchid = async (matchId : number)=>{
+    if(!matchId){
+        return JSON.parse(JSON.stringify({message:"No Match Found" , status:400}));
+    }
+    try {
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
