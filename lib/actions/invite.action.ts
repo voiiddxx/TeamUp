@@ -41,7 +41,18 @@ export const getInvitationAspermatchid = async (matchId : number)=>{
     if(!matchId){
         return JSON.parse(JSON.stringify({message:"No Match Found" , status:400}));
     }
+
     try {
+        
+        const res = await prisma.invite.findMany({
+            where:{
+                inviteformatchid:2
+            }
+        });
+        if(!res){
+            return JSON.parse(JSON.stringify({message:"No invitation found" , status:401}));
+        }
+        return JSON.parse(JSON.stringify({data:res , status:200}));
         
     } catch (error) {
         console.log(error);
