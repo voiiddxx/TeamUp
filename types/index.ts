@@ -43,3 +43,10 @@ export type CreateMacthParams = {
     date: Date
    }
 }
+
+
+export type CreateInviteParams = {
+    data:{
+        
+    }
+}
