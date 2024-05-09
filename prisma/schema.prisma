@@ -46,6 +46,7 @@ model Team {
   joinedMatch Match[] @relation("teamJoinedmatch")
   winningteam Match[] @relation("winningteam")
   loosedMatch Match[] @relation("loosedMatch")
+  inviting Invite[]
 }
 
 
@@ -82,6 +83,8 @@ model Invite {
   inviteid Int @id @default(autoincrement())
   message String
   inviteFormatch Match @relation( fields: [inviteformatchid] , references: [matchid])
+  InvitingTeam Team @relation(fields: [invitingTeamId] , references: [teamid])
+  invitingTeamId Int
   inviteformatchid Int
   
 }
