@@ -15,6 +15,7 @@ datasource db {
 
 
 
+
 model User {
   userid Int @id @default(autoincrement())
   clerkId String
@@ -27,6 +28,7 @@ model User {
   wonmatch Int
   loses Int?
   tied Int?
+  captains Team[]
 }
 
 model Team {
@@ -37,6 +39,8 @@ model Team {
   members User[] @relation("teamMembers")
   rating Int?
   feedbacks String[]
+  captain User @relation(fields: [captainId] , references: [userid])
+  captainId Int
   won Int?
   lost Int? 
   tie Int?
