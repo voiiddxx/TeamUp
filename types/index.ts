@@ -28,6 +28,7 @@ export type createTeamParams = {
         name:string
         logo:string
         caption:string
+        captainId:number
     }
 }
 
