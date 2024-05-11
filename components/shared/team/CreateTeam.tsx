@@ -60,7 +60,8 @@ const CreateTeam = () => {
       name:values.name,
       teamcode:values.teamcode,
       logo:"Logotext",
-      captainId:4
+      captainId:2,
+      categoryId:2
     }
   });
   if(res.status == 200){
