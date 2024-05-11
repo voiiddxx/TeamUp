@@ -16,7 +16,9 @@ import { Input } from "@/components/ui/input"
 import { z } from "zod"
  
 const formSchema = z.object({
-  username: z.string().min(2).max(50),
+  name: z.string().min(2).max(50),
+  moto: z.string().min(2).max(50),
+  category: z.string().min(2).max(50),
 })
 
 
@@ -27,7 +29,9 @@ const CreateTeam = () => {
    const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      name: "",
+      category: "",
+      moto:""
     },
   })
 
@@ -51,7 +55,7 @@ const CreateTeam = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="username"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
@@ -67,7 +71,7 @@ const CreateTeam = () => {
         />
         <FormField
           control={form.control}
-          name="username"
+          name="category"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
@@ -86,7 +90,7 @@ const CreateTeam = () => {
         </div>
         <FormField
           control={form.control}
-          name="username"
+          name="moto"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
