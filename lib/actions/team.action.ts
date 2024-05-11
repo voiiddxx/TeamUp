@@ -28,7 +28,8 @@ export const CreateTeamAction = async ({data}:createTeamParams)=>{
                  tie:0,
                  won:0,
                  rating:0,
-                 categoryId:1
+                 categoryId:1,
+                 location:data.locaton
             }
         });
         if(!teamRes){

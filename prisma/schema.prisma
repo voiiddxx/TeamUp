@@ -36,6 +36,7 @@ model Team {
   name String
   punchline String
   logo String
+  location String
   members User[] @relation("teamMembers")
   rating Int?
   feedbacks String[]

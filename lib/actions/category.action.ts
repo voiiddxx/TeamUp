@@ -51,3 +51,19 @@ export const GetCategoryWithId = async (categoryId:number)=>{
         
     }
 }
+
+
+// server action for getting all the sports game category 
+
+export const getAllCategoryAction = async ()=>{
+    try {
+        const category = await prisma.sportcategory.findMany({});
+        if(!category){
+            return JSON.parse(JSON.stringify({messafe:"No Category Found" , status:400}));
+        }
+        return JSON.parse(JSON.stringify({data:category , status:200}));
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
