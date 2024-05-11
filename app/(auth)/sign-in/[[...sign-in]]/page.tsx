@@ -1,9 +1,8 @@
+import { SignIn } from '@clerk/nextjs';
 import React from 'react'
 
 const page = () => {
-  return (
-    <div>this is for signin page</div>
-  )
+  return <SignIn path="/sign-in" />;
 }
 
 export default page
