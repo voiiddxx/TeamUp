@@ -22,11 +22,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getAllCategoryAction } from "@/lib/actions/category.action";
+import { CreateTeamAction } from "@/lib/actions/team.action";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
-  moto: z.string().min(2).max(50),
-  category: z.string().min(2).max(50),
+    moto: z.string().min(2).max(50),
+  location: z.string().min(2).max(50),
+  teamcode: z.string().min(2).max(50),
 });
 
 const CreateTeam = () => {
@@ -38,15 +40,34 @@ const CreateTeam = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      category: "",
       moto: "",
+      teamcode:"",
+      location:""
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+  // team logo pending sending the dummy text instead of sending the image
+
+  if(!values){
+    alert("No value added");
+  }
+  const res = await CreateTeamAction({
+    data:{
+      caption:values.moto,
+      locaton:values.location,
+      name:values.name,
+      teamcode:values.teamcode,
+      logo:"Logotext",
+      captainId:4
+    }
+  });
+  if(res.status == 200){
+    alert("Team Created");
+  }else{
+    alert("Caught some error");
+  }
     console.log(values);
   }
 
@@ -93,7 +114,7 @@ const CreateTeam = () => {
             />
             <FormField
               control={form.control}
-              name="category"
+              name="moto"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Username</FormLabel>
@@ -110,14 +131,7 @@ const CreateTeam = () => {
             <div>
               <Input type="file" />
             </div>
-            <FormField
-              control={form.control}
-              name="moto"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Select onValueChange={(val)=>{
+            <Select onValueChange={(val)=>{
                       setSelectedCategory(val)
                     }} >
                       <SelectTrigger className="w-[180px]">
@@ -137,6 +151,14 @@ const CreateTeam = () => {
                         }
                       </SelectContent>
                     </Select>
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Team Location" {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
@@ -147,12 +169,12 @@ const CreateTeam = () => {
             />
             <FormField
               control={form.control}
-              name="moto"
+              name="teamcode"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Team Location" {...field} />
+                    <Input placeholder="Enter The Team Code" {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.

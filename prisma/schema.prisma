@@ -52,6 +52,7 @@ model Team {
   winningteam Match[] @relation("winningteam")
   loosedMatch Match[] @relation("loosedMatch")
   inviting Invite[]
+  teamcode String
 }
 
 
