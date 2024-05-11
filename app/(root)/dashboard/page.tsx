@@ -4,7 +4,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className='flex justify-center items-center gap-8' >
+    <div className=' h-screen w-full flex justify-center items-center gap-8' >
         <Link href={'/dashboard/team/create'} ><Button>Create Team</Button></Link>
         <Button>Join Team</Button>
         {/* if team is created show that  button */}

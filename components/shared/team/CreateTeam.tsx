@@ -32,6 +32,7 @@ const formSchema = z.object({
 const CreateTeam = () => {
 
   const [Sportscategory, setSportscategory] = useState<any>(null);
+  const [SelectedCategory, setSelectedCategory] = useState<any>(null);
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -116,9 +117,11 @@ const CreateTeam = () => {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Select>
+                    <Select onValueChange={(val)=>{
+                      setSelectedCategory(val)
+                    }} >
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Theme" />
+                        <SelectValue placeholder="Select Sports Categotry" />
                       </SelectTrigger>
                       <SelectContent>
                         {
@@ -126,15 +129,12 @@ const CreateTeam = () => {
                             <div>
                               {
                                 Sportscategory.map((curr:any)=>{
-                                  return <SelectItem value={curr.sportcategoryid}>{curr.name}</SelectItem>
+                                  return <SelectItem value={curr.name}  >{curr.name}</SelectItem>
                                 })
                               }
                             </div>
                           )
                         }
-                        {/* <SelectItem value="light">Light</SelectItem>
-                        <SelectItem value="dark">Dark</SelectItem>
-                        <SelectItem value="system">System</SelectItem> */}
                       </SelectContent>
                     </Select>
                   </FormControl>
