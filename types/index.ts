@@ -54,3 +54,12 @@ export type CreateInviteParams = {
         
     }
 }
+
+
+export type JointeamWithCodeParams = {
+    data:{
+        teamid:number
+        userid:number,
+        code: string
+    }
+}
