@@ -1,8 +1,8 @@
-"use client"
-import React from 'react'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
+"use client";
+import React, { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,123 +11,164 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { z } from "zod"
- 
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { getAllCategoryAction } from "@/lib/actions/category.action";
+
 const formSchema = z.object({
   name: z.string().min(2).max(50),
   moto: z.string().min(2).max(50),
   category: z.string().min(2).max(50),
-})
-
+});
 
 const CreateTeam = () => {
 
-
-   // 1. Define your form.
-   const form = useForm<z.infer<typeof formSchema>>({
+  const [Sportscategory, setSportscategory] = useState<any>(null);
+  // 1. Define your form.
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       category: "",
-      moto:""
+      moto: "",
     },
-  })
+  });
 
-   // 2. Define a submit handler.
-   function onSubmit(values: z.infer<typeof formSchema>) {
+  // 2. Define a submit handler.
+  function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.log(values);
   }
 
- 
+
+  useEffect(()=>{
+    const GetCategory = async ()=>{
+      const res = await getAllCategoryAction();
+      if(res.status == 200){
+        console.log("category data: " , res.data);
+        setSportscategory(res.data);
+      }else{
+        console.log(res.data);
+        
+      }
+    }
+    GetCategory();
+  } , [])
+
   return (
-    <div className='min-h-screen w-full flex flex-col justify-center items-center' >
-
-      <div><h1>Create Your Team Now</h1></div>
-
+    <div className="min-h-screen w-full flex flex-col justify-center items-center">
       <div>
-
-        {/* react hook form for the creating the team */}
-        <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="enter your team name" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="Enter your moto" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div>
-          <Input type='file' />
-        </div>
-        <FormField
-          control={form.control}
-          name="moto"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="Choose sports" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="moto"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="Team Location" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button className='w-full' type="submit">Submit</Button>
-      </form>
-    </Form>
-
+        <h1>Create Your Team Now</h1>
       </div>
 
+      <div>
+        {/* react hook form for the creating the team */}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="enter your team name" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your moto" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div>
+              <Input type="file" />
+            </div>
+            <FormField
+              control={form.control}
+              name="moto"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Select>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Theme" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {
+                          Sportscategory && (
+                            <div>
+                              {
+                                Sportscategory.map((curr:any)=>{
+                                  return <SelectItem value={curr.sportcategoryid}>{curr.name}</SelectItem>
+                                })
+                              }
+                            </div>
+                          )
+                        }
+                        {/* <SelectItem value="light">Light</SelectItem>
+                        <SelectItem value="dark">Dark</SelectItem>
+                        <SelectItem value="system">System</SelectItem> */}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="moto"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Team Location" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className="w-full" type="submit">
+              Submit
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default CreateTeam
+export default CreateTeam;
