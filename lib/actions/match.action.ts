@@ -68,12 +68,20 @@ export const GetMatchWithIdAction = async (matchId: number) => {
 
 export const GetAllMatchesAction = async()=>{
     try {
-        const res = await prisma.match.findMany({});
+        const res = await prisma.match.findMany({
+            include:{
+                Category:true,
+                createdTeam:true,
+                invites:true,
+                Joinedteam:true,
+                looserteam:true,
+                winningteam:true,
+            }
+        });
         if(!res){
             return JSON.parse(JSON.stringify({message:"No Matches Found" , status:400}));
         }
         return JSON.parse(JSON.stringify({data:res , status:200}));
-
     } catch (error) {
         console.log(error);
         
