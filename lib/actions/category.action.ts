@@ -67,3 +67,26 @@ export const getAllCategoryAction = async ()=>{
         
     }
 }
+
+
+// export const get team based on the category
+
+export const getTeamsAndMatchWithCategory = async (categoyrId:number)=>{
+    if(!categoyrId){
+        return JSON.parse(JSON.stringify({message:"Please eneter category" , status:400}));
+    }
+
+    const res = await prisma.sportcategory.findFirst({
+        where:{
+            sportcategoryid:categoyrId
+        },
+        include:{
+            team:true,
+            match:true
+        }
+    });
+    if(!res){
+        return JSON.parse(JSON.stringify({message:"No Data Found" , status:401}));
+    }
+    return JSON.parse(JSON.stringify({data:res , status:200}));
+}
