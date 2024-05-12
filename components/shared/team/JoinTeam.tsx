@@ -10,11 +10,38 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { joinTeamWithCode } from "@/lib/actions/team.action";
 
 const JoinTeam = () => {
 
     const [TeamCode, setTeamCode] = useState<any>(null);
     const [TeamId, setTeamId] = useState<any>(null);
+
+    const hanldeJoinTeam = async () =>{
+      if(!TeamCode && !TeamId){
+        alert("Invalid Values");
+      }else{
+        const res = await joinTeamWithCode({
+          data:{
+            code:TeamCode,
+            teamid:TeamId,
+            userid:2
+          }
+        });
+        if(res.status==400){
+          alert("No Team data found");
+        }
+        else if(res.status == 401){
+          alert("Invalid values , no team availbale")
+        }
+        else if(res.status == 402){
+          alert("You had Already Joined this team");
+        }
+        else if(res.status == 200){
+          alert("Team Joined");
+        }
+      }
+    }
     
   return (
     <Dialog>
