@@ -2,6 +2,7 @@
 
 import { createTeamParams, JointeamWithCodeParams } from "@/types";
 import { PrismaClient } from "@prisma/client";
+import { PiSquare } from "lucide-react";
 
 
 
@@ -134,6 +135,24 @@ export const JoinTeamWithCodeAction = async ({data}:JointeamWithCodeParams)=>{
         }
         return JSON.parse(JSON.stringify({data:res , status:200}));
         
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+// server action for getting all the teams
+
+export const GetAllTeamAction = async()=>{
+    try {
+        const res = await prisma.team.findMany({
+
+        });
+        if(!res){
+            return JSON.parse(JSON.stringify({message:"No Data Found" , status:400}));
+        }
+        return JSON.parse(JSON.stringify({data:res , status:200}));
     } catch (error) {
         console.log(error);
         
