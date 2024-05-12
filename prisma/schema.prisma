@@ -30,6 +30,7 @@ model User {
   tied Int?
   captains Team[]
   mymatches Match[]
+  createdTeam Team[] @relation("createdTeam")
 }
 
 model Team {
@@ -54,6 +55,8 @@ model Team {
   loosedMatch Match[] @relation("loosedMatch")
   inviting Invite[]
   teamcode String
+  owneredby User @relation("createdTeam" , fields: [ownerid] , references: [userid])
+  ownerid Int
 }
 
 
