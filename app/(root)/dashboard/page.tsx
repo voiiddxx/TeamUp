@@ -12,7 +12,7 @@ const page = () => {
         <Button>My Team</Button>
         {/* if team is created show that  button end */}
        <Link href={`/dashboard/match/create`} > <Button>Create Match</Button></Link>
-        <Button>Explore Match</Button>
+       <Link href={`/dashboard/match`} > <Button>Explore Match</Button></Link>
     </div>
   )
 }
