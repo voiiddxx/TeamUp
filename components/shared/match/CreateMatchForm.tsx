@@ -23,7 +23,8 @@ const CreateMatchForm = () => {
                     location:"India",
                     bet:500,
                     categoryId:2,
-                    createdTeamId:4
+                    createdTeamId:4,
+                    userid:1
                 }
             });
             if(res.status == 400){
