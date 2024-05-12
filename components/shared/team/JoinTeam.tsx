@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import {
   Dialog,
@@ -10,24 +11,25 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { joinTeamWithCode } from "@/lib/actions/team.action";
-
+import { JoinTeamWithCodeAction } from "@/lib/actions/team.action";
 const JoinTeam = () => {
 
     const [TeamCode, setTeamCode] = useState<any>(null);
     const [TeamId, setTeamId] = useState<any>(null);
 
     const hanldeJoinTeam = async () =>{
-      if(!TeamCode && !TeamId){
+      if(TeamCode==null && TeamId==null){
         alert("Invalid Values");
       }else{
-        const res = await joinTeamWithCode({
+        const res = await JoinTeamWithCodeAction({
           data:{
             code:TeamCode,
-            teamid:TeamId,
-            userid:2
+            teamid:4,
+            userid:4
           }
         });
+        console.log(res);
+        
         if(res.status==400){
           alert("No Team data found");
         }
@@ -61,7 +63,7 @@ const JoinTeam = () => {
                 setTeamCode(e.target.value)
             }} className="mt-4"  placeholder="Team Code" />
             <div className=" w-full flex justify-end items-center mt-8 " >
-                <Button>Join Team</Button>
+                <Button onClick={hanldeJoinTeam} >Join Team</Button>
 
             </div>
           </DialogDescription>

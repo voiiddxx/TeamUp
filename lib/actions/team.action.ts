@@ -86,7 +86,7 @@ export const getTeamWithTeamIdAction = async (teamId: number)=>{
 
 // server action for useres to joining the team
 
-export const joinTeamWithCode = async ({data}:JointeamWithCodeParams)=>{
+export const JoinTeamWithCodeAction = async ({data}:JointeamWithCodeParams)=>{
     try {
         if(!data){
             return JSON.parse(JSON.stringify({message:"No Data Found" , status:400}));
@@ -111,7 +111,7 @@ export const joinTeamWithCode = async ({data}:JointeamWithCodeParams)=>{
         const IsUserMember = isTeamAvailable.members.some(curr=> curr.userid == data.userid);
 
 
-        if(!IsUserMember){
+        if(IsUserMember){
             return JSON.parse(JSON.stringify({message:"User is already in the team" , status:402}));
         }
 
