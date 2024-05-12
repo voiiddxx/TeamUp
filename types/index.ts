@@ -66,3 +66,13 @@ export type JointeamWithCodeParams = {
         code: string
     }
 }
+
+
+
+export type SendInviteForChalangeParams = {
+    data:{
+        teamid:number
+        matchid:number
+        custom_message:string
+    }
+}

@@ -1,6 +1,6 @@
 "use server"
 
-import { CreateMacthParams } from "@/types"
+import { CreateMacthParams, createTeamParams, SendInviteForChalangeParams } from "@/types"
 import { Prisma, PrismaClient } from "@prisma/client";
 
 
@@ -82,6 +82,45 @@ export const GetAllMatchesAction = async()=>{
             return JSON.parse(JSON.stringify({message:"No Matches Found" , status:400}));
         }
         return JSON.parse(JSON.stringify({data:res , status:200}));
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+
+// server action for send the invite or for chalange the team
+export const InviteTeamForChalange = async ({data}:SendInviteForChalangeParams)=>{
+    if(!data){
+        return JSON.parse(JSON.stringify({message:"No Data Found" , status:400}));
+    }
+    try {        
+        const IsMatch = await prisma.match.findFirst({
+            where:{
+                matchid:data.matchid,
+            }
+        });
+        if(!IsMatch){
+            return JSON.parse(JSON.stringify({message:"No Match Found", status:401}));
+        }
+        const isOpen = IsMatch.status === "Open";
+
+        if(!isOpen){
+            return JSON.parse(JSON.stringify({message:"This Match Is Not Accepting Any Invite" , status:402}));
+        }
+        
+        const InviteRes = await prisma.invite.create({
+            data:{
+                message:data.custom_message,
+                inviteformatchid:data.matchid,
+                invitingTeamId:data.teamid
+            }
+        });
+
+        if(!InviteRes){
+            return JSON.parse(JSON.stringify({message:"Some Issue Occured" , status:403}));
+        }
+        return JSON.parse(JSON.stringify({data:InviteRes , status:200}));
     } catch (error) {
         console.log(error);
         
