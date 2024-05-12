@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 
 // server action for creating the match
 
-export const CreatMatchAction = async ({ data }: CreateMacthParams) => {
+export const CreateMatchAction = async ({ data }: CreateMacthParams) => {
     if (!data) {
         return JSON.parse(JSON.stringify({ message: "No Data Found", status: 400 }));
     }
