@@ -76,3 +76,13 @@ export type SendInviteForChalangeParams = {
         custom_message:string
     }
 }
+
+
+export type AcceptMatchInviteParams = {
+    data:{
+        matchid:number
+        ownTeamId:number
+        against_team_id:number
+        inviteId:number
+    }
+}
