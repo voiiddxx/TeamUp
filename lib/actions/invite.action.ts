@@ -71,16 +71,36 @@ export const InviteTeamForChalange = async ({ data }: SendInviteForChalangeParam
         const IsMatch = await prisma.match.findFirst({
             where: {
                 matchid: data.matchid,
+            },
+            include:{
+                createdTeam:true,
+                invites:true
             }
         });
         if (!IsMatch) {
             return JSON.parse(JSON.stringify({ message: "No Match Found", status: 401 }));
         }
+
+        const isValidOpponent = IsMatch.createdTeam.teamid === data.teamid;
+
+        if(isValidOpponent){
+            return JSON.parse(JSON.stringify({message:"You Can't Chalange This Match" , staus:404}));
+        }
+
+
         const isOpen = IsMatch.status === "Open";
 
         if (!isOpen) {
             return JSON.parse(JSON.stringify({ message: "This Match Is Not Accepting Any Invite", status: 402 }));
         }
+
+
+        const isAlreadyInvited = IsMatch.invites.some(curr => curr.invitingTeamId === data.teamid);
+        
+        if(isAlreadyInvited){
+            return JSON.parse(JSON.stringify({message:"Already Chalanged" , status:405}));
+        }
+
 
         const InviteRes = await prisma.invite.create({
             data: {
@@ -180,10 +200,7 @@ export const AcceptInviteMatchAction = async ({ data }: AcceptMatchInviteParams)
         if (!accpetRes) {
             return JSON.parse(JSON.stringify({ message: "Some Issue While Accepting reques , try again later", status: 406 }));
         }
-
         return JSON.parse(JSON.stringify({ data: accpetRes, status: 200 }));
-
-
     } catch (error) {
         console.log(error);
 
