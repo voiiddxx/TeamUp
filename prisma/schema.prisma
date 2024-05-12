@@ -69,18 +69,18 @@ model Match {
   matchid Int @id @default(autoincrement())
   createdTeam Team @relation(fields: [createdteamId] , references: [teamid])
   createdteamId Int
-  Joinedteam Team @relation("teamJoinedmatch" , fields: [joinedteamid] , references: [teamid])
-  joinedteamid Int
+  Joinedteam Team? @relation("teamJoinedmatch" , fields: [joinedteamid] , references: [teamid])
+  joinedteamid Int?
   location String
   time DateTime
   bet Int
   status String
   Category Sportcategory @relation(fields: [matchCategoryId] , references: [sportcategoryid])
   matchCategoryId Int
-  winningteam Team @relation("winningteam" , fields: [winningteamid] , references: [teamid])
-  winningteamid Int
-  looserteam Team @relation("loosedMatch" , fields: [looserteamid] , references: [teamid])
-  looserteamid Int
+  winningteam Team? @relation("winningteam" , fields: [winningteamid] , references: [teamid])
+  winningteamid Int?
+  looserteam Team? @relation("loosedMatch" , fields: [looserteamid] , references: [teamid])
+  looserteamid Int?
   invites Invite[]
 }
 
