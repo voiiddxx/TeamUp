@@ -20,7 +20,10 @@ const CreateMatchForm = () => {
             const res = await CreateMatchAction({
                 data:{
                     date: new Date,
-                    location:"India"
+                    location:"India",
+                    bet:500,
+                    categoryId:2,
+                    createdTeamId:4
                 }
             });
             if(res.status == 400){

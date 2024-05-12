@@ -20,15 +20,12 @@ export const CreateMatchAction = async ({ data }: CreateMacthParams) => {
     }
     const matchRes = await prisma.match.create({
         data: {
-            bet: 2,
+            bet: 2500,
             location: data.location,
-            status: '11',
+            status: 'Open',
             time: data.date,
-            matchCategoryId: 5151521,
-            createdteamId: 2211,
-            joinedteamid: 3211,
-            looserteamid: 2111,
-            winningteamid: 11515,
+            matchCategoryId: data.categoryId,
+            createdteamId: data.createdTeamId,
         }
     });
     if (!matchRes) {

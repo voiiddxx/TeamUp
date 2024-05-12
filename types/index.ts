@@ -45,6 +45,9 @@ export type CreateMacthParams = {
    data:{
     location:string
     date: Date
+    bet:any
+    createdTeamId:number
+    categoryId:number
    }
 }
 
