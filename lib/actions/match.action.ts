@@ -26,6 +26,7 @@ export const CreateMatchAction = async ({ data }: CreateMacthParams) => {
             time: data.date,
             matchCategoryId: data.categoryId,
             createdteamId: data.createdTeamId,
+            
         }
     });
     if (!matchRes) {

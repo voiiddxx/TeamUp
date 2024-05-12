@@ -48,6 +48,7 @@ export type CreateMacthParams = {
     bet:any
     createdTeamId:number
     categoryId:number
+    userid: number
    }
 }
 
