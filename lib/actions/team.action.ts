@@ -15,146 +15,147 @@ const prisma = new PrismaClient();
 
 // server action for creating the team
 
-export const CreateTeamAction = async ({data}:createTeamParams)=>{
+export const CreateTeamAction = async ({ data }: createTeamParams) => {
     try {
-        if(!data) return JSON.parse(JSON.stringify({message:"No Data found" , status:400}));
+        if (!data) return JSON.parse(JSON.stringify({ message: "No Data found", status: 400 }));
         const teamRes = await prisma.team.create({
-            data:{
-                name:data.name,
-                logo:data.logo,
-                punchline:data.caption,
-                captainId:data.captainId,
-                feedbacks:[],
-                 lost:0,
-                 tie:0,
-                 won:0,
-                 rating:0,
-                 categoryId:data.categoryId,
-                 location:data.locaton,                 
-                 teamcode:data.teamcode,
-                 members:{
-                    connect:{userid:1}
-                 }
-                 
+            data: {
+                name: data.name,
+                logo: data.logo,
+                punchline: data.caption,
+                captainId: data.captainId,
+                feedbacks: [],
+                lost: 0,
+                tie: 0,
+                won: 0,
+                rating: 0,
+                categoryId: data.categoryId,
+                location: data.locaton,
+                teamcode: data.teamcode,
+                ownerid:data.userid,
+                members: {
+                    connect: { userid: 1 }
+                }
+
             }
         });
-        if(!teamRes){
-            return JSON.parse(JSON.stringify({message:"No Team found" , status:400}));
+        if (!teamRes) {
+            return JSON.parse(JSON.stringify({ message: "No Team found", status: 400 }));
         }
-        return JSON.parse(JSON.stringify({data:teamRes , status:200}));
+        return JSON.parse(JSON.stringify({ data: teamRes, status: 200 }));
     } catch (error) {
         console.log(error);
-        
+
     }
 }
 
 
 // server action for getting the team with teamId
 
-export const getTeamWithTeamIdAction = async (teamId: number)=>{
+export const getTeamWithTeamIdAction = async (teamId: number) => {
 
-    if(!teamId){
-        return JSON.parse(JSON.stringify({message:"No TeamId Found" , status:400}))
+    if (!teamId) {
+        return JSON.parse(JSON.stringify({ message: "No TeamId Found", status: 400 }))
     }
     try {
         const teamRes = await prisma.team.findFirst({
-            where:{
-                teamid:teamId
+            where: {
+                teamid: teamId
             },
-            include:{
-                category:true,
-                createdmatch:true,
-                joinedMatch:true,
-                loosedMatch:true,
-                members:true,
-                winningteam:true,
-                captain:true
-                
+            include: {
+                category: true,
+                createdmatch: true,
+                joinedMatch: true,
+                loosedMatch: true,
+                members: true,
+                winningteam: true,
+                captain: true
+
             }
         });
 
-        if(!teamRes) {
-            return JSON.parse(JSON.stringify({message:"No Team Found" , status:401}));
+        if (!teamRes) {
+            return JSON.parse(JSON.stringify({ message: "No Team Found", status: 401 }));
         }
-        return JSON.parse(JSON.stringify({data:teamRes , status:200}));
+        return JSON.parse(JSON.stringify({ data: teamRes, status: 200 }));
 
     } catch (error) {
         console.log(error);
-        
+
     }
 }
 
 
 // server action for useres to joining the team
 
-export const JoinTeamWithCodeAction = async ({data}:JointeamWithCodeParams)=>{
+export const JoinTeamWithCodeAction = async ({ data }: JointeamWithCodeParams) => {
     try {
-        if(!data){
-            return JSON.parse(JSON.stringify({message:"No Data Found" , status:400}));
+        if (!data) {
+            return JSON.parse(JSON.stringify({ message: "No Data Found", status: 400 }));
         }
         const isTeamAvailable = await prisma.team.findFirst({
-            where:{
-                teamid:data.teamid,
-                teamcode:data.code
+            where: {
+                teamid: data.teamid,
+                teamcode: data.code
             },
-            include:{
-                members:true,
-                captain:true,
+            include: {
+                members: true,
+                captain: true,
             }
         });
-        if(!isTeamAvailable){
-            return JSON.parse(JSON.stringify({message:"No Team Found" , status:401}));
+        if (!isTeamAvailable) {
+            return JSON.parse(JSON.stringify({ message: "No Team Found", status: 401 }));
         }
-        
-           // checking if user is already the player of the team
+
+        // checking if user is already the player of the team
         //    const IsUserAlreadyMember = is.members.some(members => members.id === userdId);
 
-        const IsUserMember = isTeamAvailable.members.some(curr=> curr.userid == data.userid);
+        const IsUserMember = isTeamAvailable.members.some(curr => curr.userid == data.userid);
 
 
-        if(IsUserMember){
-            return JSON.parse(JSON.stringify({message:"User is already in the team" , status:402}));
+        if (IsUserMember) {
+            return JSON.parse(JSON.stringify({ message: "User is already in the team", status: 402 }));
         }
 
         const res = await prisma.team.update({
-            where:{
-                teamid:data.teamid,
-                teamcode:data.code
+            where: {
+                teamid: data.teamid,
+                teamcode: data.code
             },
-            data:{
-                members:{
-                    connect:{
-                     userid:data.userid   
+            data: {
+                members: {
+                    connect: {
+                        userid: data.userid
                     }
                 }
             }
         });
 
-        if(!res){
-            return JSON.parse(JSON.stringify({message:"Some issue occured , please try again later" , status:403}));
+        if (!res) {
+            return JSON.parse(JSON.stringify({ message: "Some issue occured , please try again later", status: 403 }));
         }
-        return JSON.parse(JSON.stringify({data:res , status:200}));
-        
+        return JSON.parse(JSON.stringify({ data: res, status: 200 }));
+
     } catch (error) {
         console.log(error);
-        
+
     }
 }
 
 
 // server action for getting all the teams
 
-export const GetAllTeamAction = async()=>{
+export const GetAllTeamAction = async () => {
     try {
         const res = await prisma.team.findMany({
 
         });
-        if(!res){
-            return JSON.parse(JSON.stringify({message:"No Data Found" , status:400}));
+        if (!res) {
+            return JSON.parse(JSON.stringify({ message: "No Data Found", status: 400 }));
         }
-        return JSON.parse(JSON.stringify({data:res , status:200}));
+        return JSON.parse(JSON.stringify({ data: res, status: 200 }));
     } catch (error) {
         console.log(error);
-        
+
     }
 }

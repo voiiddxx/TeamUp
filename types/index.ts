@@ -32,6 +32,7 @@ export type createTeamParams = {
         locaton:string
         teamcode:string
         categoryId:number
+        userid:number
     }
 }
 
