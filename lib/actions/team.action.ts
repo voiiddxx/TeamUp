@@ -22,7 +22,7 @@ export const CreateTeamAction = async ({ data }: createTeamParams) => {
             data: {
                 name: data.name,
                 logo: data.logo,
-                punchline: data.caption,    
+                punchline: data.caption,
                 captainId: data.captainId,
                 feedbacks: [],
                 lost: 0,
@@ -32,7 +32,7 @@ export const CreateTeamAction = async ({ data }: createTeamParams) => {
                 categoryId: data.categoryId,
                 location: data.locaton,
                 teamcode: data.teamcode,
-                ownerid:data.userid,
+                ownerid: data.userid,
                 members: {
                     connect: { userid: 1 }
                 }
@@ -163,28 +163,28 @@ export const GetAllTeamAction = async () => {
 
 // server action for getting the team of user in which he is caption or member or whatever
 
-export const GetUserTeamAction = async (userid: number)=>{
-    if(!userid){
-        return JSON.parse(JSON.stringify({message:"User Not Found" , status:400}));
+export const GetUserTeamAction = async (userid: number) => {
+    if (!userid) {
+        return JSON.parse(JSON.stringify({ message: "User Not Found", status: 400 }));
     }
     try {
         const res = await prisma.team.findMany({
-            where:{
-                members:{
-                    some:{
-                        userid:userid
+            where: {
+                members: {
+                    some: {
+                        userid: userid
                     }
                 }
             }
         });
 
-        if(!res){
-            return JSON.parse(JSON.stringify({message:"No Team Found" , status:401}));
+        if (!res) {
+            return JSON.parse(JSON.stringify({ message: "No Team Found", status: 401 }));
         }
 
-        return JSON.parse(JSON.stringify({data:res , status:200}));
+        return JSON.parse(JSON.stringify({ data: res, status: 200 }));
     } catch (error) {
         console.log(error);
-        
+
     }
 }

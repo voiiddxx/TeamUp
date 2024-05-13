@@ -64,6 +64,7 @@ if(eventType == "user.created"){
     const username = evt.data.username!;
     const avatar = evt.data.image_url;
     const res = await CreateUserAction({data:{avatar:avatar , email:email , clerkId:id , username:username}});
+    
 }
 
 
