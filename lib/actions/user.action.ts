@@ -2,15 +2,10 @@
 
 import { CreateUserParams, UpdateUserParams } from "@/types";
 import { PrismaClient } from '@prisma/client'
-import { KoalaWelcomeEmail } from "@/emails/WelcomeMail";
-import { Resend } from 'resend';
 
 
 
 const prisma = new PrismaClient();
-
-// resend config
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 // server action for creating the user
 export const CreateUserAction = async ({ CreatedData }: CreateUserParams) => {
@@ -33,25 +28,7 @@ export const CreateUserAction = async ({ CreatedData }: CreateUserParams) => {
         });
         if (!userRes) {
             return JSON.parse(JSON.stringify({ message: "Some error occured", status: 400 }));
-        }
-
-        // sending the mail when user get created
-        // const {emaildata , error} = await resend
-        const { data, error } = await resend.emails.send({
-            from: 'Acme <onboarding@resend.dev>',
-            to: [CreatedData.email],
-            subject: 'Welcome To TeamUp',
-            react: KoalaWelcomeEmail({ useremail: CreatedData.email , userFirstname:CreatedData.username }),
-        });
-
-        if(error){
-            return JSON.parse(JSON.stringify({message:"Some Issue Occured" , status:404}));
-        }
-        if(data){
-            console.log("Email Sended");
-        }
-        console.log("Data got created: " , data);
-        
+        }        
         console.log("this is the value of userRes: ",userRes);
         
 

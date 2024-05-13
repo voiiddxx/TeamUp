@@ -8,8 +8,11 @@ import { Button } from '../ui/button'
     type HeroPagePros = {
         clerkId:any
     }
-const Hero = ({clerkId}:HeroPagePros) => {
 
+
+    
+const Hero = ({clerkId}:HeroPagePros) => {
+   
     useEffect(()=>{
         const getUser = async ()=>{
             const res = await gerUserasPerClerkId(clerkId);
@@ -27,6 +30,7 @@ const Hero = ({clerkId}:HeroPagePros) => {
         <Link href={`/dashboard`} >
      <Button>Go to dashboard</Button>
      </Link>
+  
 
     </div>
   )
