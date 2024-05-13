@@ -2,7 +2,7 @@
 
 import { CreateUserParams, UpdateUserParams } from "@/types";
 import { PrismaClient } from '@prisma/client'
-import WelcomeEmail from "@/emails/WelcomeMail";
+import { KoalaWelcomeEmail } from "@/emails/WelcomeMail";
 import { Resend } from 'resend';
 
 
@@ -41,7 +41,7 @@ export const CreateUserAction = async ({ CreatedData }: CreateUserParams) => {
             from: 'Acme <onboarding@resend.dev>',
             to: [CreatedData.email],
             subject: 'Welcome To TeamUp',
-            react: WelcomeEmail({ useremail: CreatedData.email , userFirstname:CreatedData.username }),
+            react: KoalaWelcomeEmail({ useremail: CreatedData.email , userFirstname:CreatedData.username }),
         });
 
         if(error){
@@ -49,8 +49,11 @@ export const CreateUserAction = async ({ CreatedData }: CreateUserParams) => {
         }
         if(data){
             console.log("Email Sended");
-            
         }
+        console.log("Data got created: " , data);
+        
+        console.log("this is the value of userRes: ",userRes);
+        
 
 
         return JSON.parse(JSON.stringify({ data: userRes, status: 200 }));
