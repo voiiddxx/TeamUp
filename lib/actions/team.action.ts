@@ -273,8 +273,48 @@ export const UpdateTeamCaptainAction = async ( { data } : UpdateTeamCaptainParam
 
 // server action for deleting the team
 
-export const DeleteTeamAction = async ({}:DeleteTeamParams)=>{
+export const DeleteTeamAction = async ({data}:DeleteTeamParams)=>{
+
+    if(!data){
+        return JSON.parse(JSON.stringify({message:"No Data found" , status:400}));
+    }
     try {
+
+        const teamRes = await prisma.team.findFirst({
+            where:{
+                teamid:data.teamid
+            },
+            include:{
+                captain:true
+            }
+        });
+
+        if(!teamRes){
+            return JSON.parse(JSON.stringify({message:"No team found" , status:401}));
+        }
+
+        const isCaptain = teamRes.captain.userid === data.captainid;
+        if(!isCaptain){
+            return JSON.parse(JSON.stringify({message:"Only captain can delete the team" , status:401}));
+        }
+
+        const updateCaptainRes = await prisma.team.update({
+            where:{
+                teamid:data.teamid
+            },
+            data:{
+                captainId:data.captainid
+            }
+        });
+
+        if(!updateCaptainRes){
+            return JSON.parse(JSON.stringify({message:"Some issue occured" , status:402}));
+        }
+
+        return JSON.parse(JSON.stringify({data:updateCaptainRes , status:200}));
+
+         
+
         
     } catch (error) {
         
