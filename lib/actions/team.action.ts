@@ -36,7 +36,6 @@ export const CreateTeamAction = async ({ data }: createTeamParams) => {
                 members: {
                     connect: { userid: data.userid }
                 }
-
             }
         });
         if (!teamRes) {
@@ -187,4 +186,39 @@ export const GetUserTeamAction = async (userid: number) => {
         console.log(error);
 
     }
+}
+
+
+
+// server action for getting the team cretaed by users
+
+export const getCreatedTeamByUser = async (userId : number)=>{
+    if(!userId){
+        return JSON.parse(JSON.stringify({message:"No Data Found" , status:400}));
+    }
+        try {
+            const teamRes = await prisma.team.findMany({
+                where:{
+                    ownerid:userId
+                },
+                include:{
+                    captain:true,
+                    category:true,
+                    createdmatch:true,
+                    joinedMatch:true,
+                    members:true,
+                    loosedMatch:true,
+                    winningteam:true,
+                }
+            });
+
+            if(!teamRes){
+                return JSON.parse(JSON.stringify({message:"No Team found" , status:401}));
+            }
+
+            return JSON.parse(JSON.stringify({data:teamRes , status:200}));
+            
+        } catch (error) {
+            
+        }
 }
