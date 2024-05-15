@@ -1,6 +1,6 @@
 "use server"
 
-import { createTeamParams, JointeamWithCodeParams } from "@/types";
+import { createTeamParams, JointeamWithCodeParams, UpdateTeamCaptainParams } from "@/types";
 import { PrismaClient } from "@prisma/client";
 import { PiSquare } from "lucide-react";
 
@@ -221,4 +221,16 @@ export const getCreatedTeamByUser = async (userId : number)=>{
         } catch (error) {
             
         }
+}
+
+
+// server action for updating the team captain
+
+export const UpdateTeamCaptainAction = ( { data } : UpdateTeamCaptainParams) =>{
+    try {
+        
+    } catch (error) {
+        console.log(error);
+        
+    }
 }

@@ -2,7 +2,7 @@
 
 
 export type CreateUserParams = {
-    data: {
+    CreatedData: {
         username: string
         email: string
         avatar: string
@@ -86,5 +86,13 @@ export type AcceptMatchInviteParams = {
         ownTeamId:number
         against_team_id:number
         inviteId:number
+    }
+}
+
+
+export type UpdateTeamCaptainParams = {
+    data:{
+        currentCaptainid:number,
+        newcaptainId:number
     }
 }
