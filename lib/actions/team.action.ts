@@ -1,6 +1,6 @@
 "use server"
 
-import { createTeamParams, JointeamWithCodeParams, UpdateTeamCaptainParams } from "@/types";
+import { createTeamParams, DeleteTeamParams, JointeamWithCodeParams, UpdateTeamCaptainParams } from "@/types";
 import { PrismaClient } from "@prisma/client";
 import { PiSquare } from "lucide-react";
 
@@ -267,6 +267,16 @@ export const UpdateTeamCaptainAction = async ( { data } : UpdateTeamCaptainParam
 
     } catch (error) {
         console.log(error);
+        
+    }
+}
+
+// server action for deleting the team
+
+export const DeleteTeamAction = async ({}:DeleteTeamParams)=>{
+    try {
+        
+    } catch (error) {
         
     }
 }

@@ -97,3 +97,11 @@ export type UpdateTeamCaptainParams = {
         teamid:number
     }
 }
+
+
+export type DeleteTeamParams = {
+    data:{
+        teamid:number,
+        captainid:number
+    }
+}
