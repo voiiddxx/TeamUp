@@ -93,6 +93,7 @@ export type AcceptMatchInviteParams = {
 export type UpdateTeamCaptainParams = {
     data:{
         currentCaptainid:number,
-        newcaptainId:number
+        newcaptainId:number,
+        teamid:number
     }
 }

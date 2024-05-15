@@ -226,9 +226,45 @@ export const getCreatedTeamByUser = async (userId : number)=>{
 
 // server action for updating the team captain
 
-export const UpdateTeamCaptainAction = ( { data } : UpdateTeamCaptainParams) =>{
+export const UpdateTeamCaptainAction = async ( { data } : UpdateTeamCaptainParams) =>{
+    if(!data){
+        return JSON.parse(JSON.stringify({message:"No Data provided" , status:400}));
+    }
     try {
+        const isTeam = await prisma.team.findFirst({
+            where:{
+                teamid:data.teamid
+            },
+            include:{
+                captain:true
+            }
+        });
+
+        if(!isTeam){
+            return JSON.parse(JSON.stringify({message:"No team found with this id" , status:401}));
+        }
+
+        const isAuthotizedCaptain = isTeam.captain.userid === data.currentCaptainid;
         
+        if(!isAuthotizedCaptain){
+            return JSON.parse(JSON.stringify({message:"Only Team captain can update the new captain , you are not authorized for this" , status:402}));
+        }
+
+        const updateRes = await prisma.team.update({
+            where:{
+                teamid:data.teamid
+            },
+            data:{
+                captainId:data.newcaptainId
+            }
+        });
+
+        if(!updateRes){
+            return JSON.parse(JSON.stringify({message:"Some Issue occured , please try again later" , status:403}));
+        }
+
+        return JSON.parse(JSON.stringify({data:updateRes , status:200}));
+
     } catch (error) {
         console.log(error);
         
