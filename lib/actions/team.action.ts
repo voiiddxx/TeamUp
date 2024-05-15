@@ -34,7 +34,7 @@ export const CreateTeamAction = async ({ data }: createTeamParams) => {
                 teamcode: data.teamcode,
                 ownerid: data.userid,
                 members: {
-                    connect: { userid: 1 }
+                    connect: { userid: data.userid }
                 }
 
             }

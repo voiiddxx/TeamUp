@@ -53,6 +53,8 @@ const CreateTeam = () => {
   if(!values){
     alert("No value added");
   }
+  const user = localStorage.getItem("x-auth-user");
+  const userId = +user!;
   const res = await CreateTeamAction({
     data:{
       caption:values.moto,
@@ -60,8 +62,9 @@ const CreateTeam = () => {
       name:values.name,
       teamcode:values.teamcode,
       logo:"Logotext",
-      captainId:2,
-      categoryId:2
+      captainId:userId,
+      categoryId:2,
+      userid:userId
     }
   });
   if(res.status == 200){
