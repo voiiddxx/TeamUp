@@ -26,7 +26,7 @@ const Hero = ({clerkId}:HeroPagePros) => {
     } , [])
   return (
     <div className='min-h-screen w-full flex justify-center items-center flex-col' >
-        <h1>This is hero page</h1>
+        <h1>This project is under developement mode</h1>
         <Link href={`/dashboard`} >
      <Button>Go to dashboard</Button>
      </Link>

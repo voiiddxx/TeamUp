@@ -192,131 +192,131 @@ export const GetUserTeamAction = async (userid: number) => {
 
 // server action for getting the team cretaed by users
 
-export const getCreatedTeamByUser = async (userId : number)=>{
-    if(!userId){
-        return JSON.parse(JSON.stringify({message:"No Data Found" , status:400}));
+export const getCreatedTeamByUser = async (userId: number) => {
+    if (!userId) {
+        return JSON.parse(JSON.stringify({ message: "No Data Found", status: 400 }));
     }
-        try {
-            const teamRes = await prisma.team.findMany({
-                where:{
-                    ownerid:userId
-                },
-                include:{
-                    captain:true,
-                    category:true,
-                    createdmatch:true,
-                    joinedMatch:true,
-                    members:true,
-                    loosedMatch:true,
-                    winningteam:true,
-                }
-            });
-
-            if(!teamRes){
-                return JSON.parse(JSON.stringify({message:"No Team found" , status:401}));
+    try {
+        const teamRes = await prisma.team.findMany({
+            where: {
+                ownerid: userId
+            },
+            include: {
+                captain: true,
+                category: true,
+                createdmatch: true,
+                joinedMatch: true,
+                members: true,
+                loosedMatch: true,
+                winningteam: true,
             }
+        });
 
-            return JSON.parse(JSON.stringify({data:teamRes , status:200}));
-            
-        } catch (error) {
-            
+        if (!teamRes) {
+            return JSON.parse(JSON.stringify({ message: "No Team found", status: 401 }));
         }
+
+        return JSON.parse(JSON.stringify({ data: teamRes, status: 200 }));
+
+    } catch (error) {
+
+    }
 }
 
 
 // server action for updating the team captain
 
-export const UpdateTeamCaptainAction = async ( { data } : UpdateTeamCaptainParams) =>{
-    if(!data){
-        return JSON.parse(JSON.stringify({message:"No Data provided" , status:400}));
+export const UpdateTeamCaptainAction = async ({ data }: UpdateTeamCaptainParams) => {
+    if (!data) {
+        return JSON.parse(JSON.stringify({ message: "No Data provided", status: 400 }));
     }
     try {
         const isTeam = await prisma.team.findFirst({
-            where:{
-                teamid:data.teamid
+            where: {
+                teamid: data.teamid
             },
-            include:{
-                captain:true
+            include: {
+                captain: true
             }
         });
 
-        if(!isTeam){
-            return JSON.parse(JSON.stringify({message:"No team found with this id" , status:401}));
+        if (!isTeam) {
+            return JSON.parse(JSON.stringify({ message: "No team found with this id", status: 401 }));
         }
 
         const isAuthotizedCaptain = isTeam.captain.userid === data.currentCaptainid;
-        
-        if(!isAuthotizedCaptain){
-            return JSON.parse(JSON.stringify({message:"Only Team captain can update the new captain , you are not authorized for this" , status:402}));
+
+        if (!isAuthotizedCaptain) {
+            return JSON.parse(JSON.stringify({ message: "Only Team captain can update the new captain , you are not authorized for this", status: 402 }));
         }
 
         const updateRes = await prisma.team.update({
-            where:{
-                teamid:data.teamid
+            where: {
+                teamid: data.teamid
             },
-            data:{
-                captainId:data.newcaptainId
+            data: {
+                captainId: data.newcaptainId
             }
         });
 
-        if(!updateRes){
-            return JSON.parse(JSON.stringify({message:"Some Issue occured , please try again later" , status:403}));
+        if (!updateRes) {
+            return JSON.parse(JSON.stringify({ message: "Some Issue occured , please try again later", status: 403 }));
         }
 
-        return JSON.parse(JSON.stringify({data:updateRes , status:200}));
+        return JSON.parse(JSON.stringify({ data: updateRes, status: 200 }));
 
     } catch (error) {
         console.log(error);
-        
+
     }
 }
 
 // server action for deleting the team
 
-export const DeleteTeamAction = async ({data}:DeleteTeamParams)=>{
+export const DeleteTeamAction = async ({ data }: DeleteTeamParams) => {
 
-    if(!data){
-        return JSON.parse(JSON.stringify({message:"No Data found" , status:400}));
+    if (!data) {
+        return JSON.parse(JSON.stringify({ message: "No Data found", status: 400 }));
     }
     try {
 
         const teamRes = await prisma.team.findFirst({
-            where:{
-                teamid:data.teamid
+            where: {
+                teamid: data.teamid
             },
-            include:{
-                captain:true
+            include: {
+                captain: true
             }
         });
 
-        if(!teamRes){
-            return JSON.parse(JSON.stringify({message:"No team found" , status:401}));
+        if (!teamRes) {
+            return JSON.parse(JSON.stringify({ message: "No team found", status: 401 }));
         }
 
         const isCaptain = teamRes.captain.userid === data.captainid;
-        if(!isCaptain){
-            return JSON.parse(JSON.stringify({message:"Only captain can delete the team" , status:401}));
+        if (!isCaptain) {
+            return JSON.parse(JSON.stringify({ message: "Only captain can delete the team", status: 401 }));
         }
 
         const updateCaptainRes = await prisma.team.update({
-            where:{
-                teamid:data.teamid
+            where: {
+                teamid: data.teamid
             },
-            data:{
-                captainId:data.captainid
+            data: {
+                captainId: data.captainid
             }
         });
 
-        if(!updateCaptainRes){
-            return JSON.parse(JSON.stringify({message:"Some issue occured" , status:402}));
+        if (!updateCaptainRes) {
+            return JSON.parse(JSON.stringify({ message: "Some issue occured", status: 402 }));
         }
 
-        return JSON.parse(JSON.stringify({data:updateCaptainRes , status:200}));
+        return JSON.parse(JSON.stringify({ data: updateCaptainRes, status: 200 }));
 
-         
 
-        
+
+
     } catch (error) {
-        
+
     }
 }
