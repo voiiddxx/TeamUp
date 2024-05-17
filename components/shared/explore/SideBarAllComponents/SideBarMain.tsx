@@ -1,5 +1,6 @@
 import { Dices, LandPlot, LucideHome } from 'lucide-react'
 import React from 'react'
+import SideAllMatches from '../SideAllMatches'
 
 const SideBarMain = () => {
   return (
@@ -25,6 +26,8 @@ const SideBarMain = () => {
             </div>
         </div>
         {/* sidebar all component shows after click */}
+
+        <SideAllMatches/>
     </div>
   )
 }
