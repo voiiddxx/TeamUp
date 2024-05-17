@@ -1,11 +1,12 @@
+import SideBarMain from '@/components/shared/explore/SideBarAllComponents/SideBarMain'
 import MainNavBar from '@/components/shared/navbars/MainNavBar'
 import React from 'react'
 
 const page = () => {
   return (
-    <div className='min-h-screen w-full bg-zinc-900' >
+    <div className='min-h-screen w-full bg-stone-950' >
         <MainNavBar/>
-        this is main page.tsx file
+        <SideBarMain/>
     </div>
   )
 }
