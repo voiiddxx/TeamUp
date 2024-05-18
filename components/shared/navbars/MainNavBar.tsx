@@ -24,7 +24,7 @@ const MainNavBar = () => {
             Logout
           </Button>
          <Link href={`/dashboard`} >
-          <Button className="bg-gradient-to-r from-zinc-900 to-zinc-900" >Go to dashboard</Button>
+         
          </Link>
          <SignedIn >
           <UserButton  afterSignOutUrl="/" />
