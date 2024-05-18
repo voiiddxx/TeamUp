@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { SignedIn, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 import React from "react";
 
 const MainNavBar = () => {
@@ -17,10 +19,16 @@ const MainNavBar = () => {
         </div>
         {/* right div */}
 
-        <div className=" flex items-center">
+        <div className=" flex items-center gap-4">
           <Button className="bg-white text-zinc-900" size={"lg"}>
             Logout
           </Button>
+         <Link href={`/dashboard`} >
+          <Button className="bg-gradient-to-r from-zinc-900 to-zinc-900" >Go to dashboard</Button>
+         </Link>
+         <SignedIn >
+          <UserButton  afterSignOutUrl="/" />
+         </SignedIn>
         </div>
       </div>
     </div>
