@@ -10,7 +10,7 @@ const DashboardnavBar = () => {
 
     </div>
   return (
-    <div className='h-20 w-full flex justify-between bg-zinc-900 bg-opacity-20 px-8' >
+    <div className='h-24 border-b border-zinc-900 w-full flex justify-between bg-zinc-900 bg-opacity-20 px-8' >
 
         {/* left div for logo */}
         <div className='h-full w-60  flex items-center justify-start' >
