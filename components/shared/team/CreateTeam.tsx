@@ -91,6 +91,25 @@ const CreateTeam = () => {
   } , [])
 
   return (
+    <>
+    {/* main form component */}
+    <div className="min-h-screen w-full px-16 py-8" >
+
+      {/* team name component */}
+      <div className="" >
+        <input className="outline-none border-none  text-white bg-transparent w-full text-2xl placeholder:text-white" type="text" placeholder=" Your Team Name" />
+      </div>
+
+
+      {/* team tagline component  */}
+      <div className="mt-4" >
+        <textarea  className="bg-transparent w-full text-blue-300 focus:border-none active:border-none border-none outline-none"  placeholder="Your Team Tagline" />
+      </div>
+      {/* team tagline component end */}
+
+    </div>
+    {/* main form component end */}
+
     <div className="min-h-screen w-full flex flex-col justify-center items-center">
       <div>
         <h1>Create Your Team Now</h1>
@@ -194,6 +213,7 @@ const CreateTeam = () => {
         </Form>
       </div>
     </div>
+    </>
   );
 };
 
