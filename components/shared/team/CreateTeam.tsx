@@ -23,7 +23,9 @@ import {
 } from "@/components/ui/select";
 import { getAllCategoryAction } from "@/lib/actions/category.action";
 import { CreateTeamAction } from "@/lib/actions/team.action";
-import { Image } from "lucide-react";
+import { convertToBase64Image } from "@/lib/ConvertBase64";
+import Image from "next/image";
+import { BoxIcon, Images } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -42,6 +44,26 @@ const CreateTeam = () => {
 
   // convert image into base64
   
+  const handleImage = (e:any)=>{
+    console.log("this func called");
+      console.log(e.target.files);
+      const file = e.target.files[0];
+
+      const reader = new FileReader();
+      if(file){
+        reader.onloadend = ()=>{
+          setteamLogo(reader.result);
+        }
+        reader.readAsDataURL(file); 
+      }
+      
+    const data = convertToBase64Image(e.target.files);
+    if(data){
+      console.log("Data got: " , data);
+    }
+    setteamLogo(data);
+    
+  }
 
 
   
@@ -121,15 +143,30 @@ const CreateTeam = () => {
 
       {/* team logo component */}
       <div>
-        <div className="h-[300px] w-[550px] rounded-md bg-stone-900 flex items-center justify-center flex-col" onClick={()=>{
-          ImageButton.current.click();
-        }} >
-          <input type="file" hidden ref={ImageButton} />
-          <Image strokeWidth={1.5} color="white" size={25} />
-          <p className="text-white font-medium mt-2" >Add your team Logo</p>
-          <p className="text-xs text-zinc-500" >size must be below 2 mb</p>
+      <input type="file" hidden ref={ImageButton} onChange={(e)=>{
+            handleImage(e);
+          }} />
+       {
+        !teamLogo && (
+          <div className="h-[300px] w-[550px] rounded-md bg-stone-900 flex items-center justify-center flex-col" onClick={()=>{
+            ImageButton.current.click();
+          }} >
+            
+            <BoxIcon strokeWidth={1.5} color="white" size={25} />
+            <p className="text-white font-medium mt-2" >Add your team Logo</p>
+            <p className="text-xs text-zinc-500" >size must be below 2 mb</p>
+  
+          </div>
+        )
+       }
 
-        </div>
+        {
+          teamLogo && (
+            <div >
+              <Image ref={ImageButton} src={teamLogo} height={500} width={500} alt="teamlogo" />
+            </div>
+          )
+        }
       </div>
       {/* team logo component end */}
 
