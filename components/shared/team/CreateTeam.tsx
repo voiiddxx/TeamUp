@@ -200,6 +200,12 @@ const CreateTeam = () => {
             </SelectContent>
           </Select>
           {/* team category component end */}
+
+          {/* team location component */}
+          <div>
+            <input className="border-none outline-none text-white bg-transparent mt-8 placeholder:text-zinc-300" placeholder="Enter Your Location" type="text" />
+          </div>
+          {/* team location component end */}
         </div>
         {/* right div */}
         <div className="h-full flex w-1/2 "></div>
