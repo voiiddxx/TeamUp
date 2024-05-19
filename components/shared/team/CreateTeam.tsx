@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/select";
 import { getAllCategoryAction } from "@/lib/actions/category.action";
 import { CreateTeamAction } from "@/lib/actions/team.action";
+import { Image } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -35,6 +36,15 @@ const CreateTeam = () => {
 
   const [Sportscategory, setSportscategory] = useState<any>(null);
   const [SelectedCategory, setSelectedCategory] = useState<any>(null);
+  const ImageButton = useRef<any>(null);
+  const [teamLogo, setteamLogo] = useState<any>(null);
+
+
+  // convert image into base64
+  
+
+
+  
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -93,11 +103,13 @@ const CreateTeam = () => {
   return (
     <>
     {/* main form component */}
-    <div className="min-h-screen w-full px-16 py-8" >
+    <div className="min-h-screen w-full px-16 py-8 flex " >
 
       {/* team name component */}
+      {/* left div */}
+      <div className="flex w-1/2 flex-col " >
       <div className="" >
-        <input className="outline-none border-none  text-white bg-transparent w-full text-2xl placeholder:text-white" type="text" placeholder=" Your Team Name" />
+        <input className="outline-none border-none  text-white bg-transparent w-full text-2xl placeholder:text-white" type="text" placeholder="Your Team Name" />
       </div>
 
 
@@ -106,6 +118,27 @@ const CreateTeam = () => {
         <textarea  className="bg-transparent w-full text-blue-300 focus:border-none active:border-none border-none outline-none"  placeholder="Your Team Tagline" />
       </div>
       {/* team tagline component end */}
+
+      {/* team logo component */}
+      <div>
+        <div className="h-[300px] w-[550px] rounded-md bg-stone-900 flex items-center justify-center flex-col" onClick={()=>{
+          ImageButton.current.click();
+        }} >
+          <input type="file" hidden ref={ImageButton} />
+          <Image strokeWidth={1.5} color="white" size={25} />
+          <p className="text-white font-medium mt-2" >Add your team Logo</p>
+          <p className="text-xs text-zinc-500" >size must be below 2 mb</p>
+
+        </div>
+      </div>
+      {/* team logo component end */}
+
+      </div>
+      {/* right div */}
+      <div className="h-24 flex w-1/2 bg-red-100" >
+
+      </div>
+      
 
     </div>
     {/* main form component end */}
