@@ -202,7 +202,7 @@ const CreateTeam = () => {
           {/* team category component end */}
         </div>
         {/* right div */}
-        <div className="h-24 flex w-1/2 bg-red-100"></div>
+        <div className="h-full flex w-1/2 "></div>
       </div>
       {/* main form component end */}
 
@@ -312,5 +312,4 @@ const CreateTeam = () => {
     </>
   );
 };
-
 export default CreateTeam;
