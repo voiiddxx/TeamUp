@@ -29,12 +29,12 @@
     "react-dom": "^18",
     "react-email": "2.1.2",
     "react-hook-form": "^7.51.4",
+    "socket.io": "*",
     "sonner": "^1.4.41",
     "svix": "^1.24.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.8",
-    "socket.io": "*"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
