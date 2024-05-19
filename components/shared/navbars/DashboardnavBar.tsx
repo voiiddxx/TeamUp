@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Dices, Dumbbell, Search } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const DashboardnavBar = () => {
@@ -23,10 +24,11 @@ const DashboardnavBar = () => {
         {/* right div for improtant actions buttons */}
         <div className=' flex items-center gap-4' >
             
-            <Button className='bg-gradient-to-r from-zinc-800 to-zinc-900 flex gap-2 items-center text-white ' >
+            <Link href={`/dashboard/team/create`}
+            ><Button className='bg-gradient-to-r from-zinc-800 to-zinc-900 flex gap-2 items-center text-white ' >
                 <Dumbbell size={25} strokeWidth={1.5} />
                 <p className='font-semibold' >Create Team</p>
-            </Button>
+            </Button></Link>
             <Button className='bg-gradient-to-r from-green-400 to-green-200 flex gap-2 items-center text-zinc-900 ' >
                 <Dices size={25} strokeWidth={1.5} />
                 <p className='font-semibold' >Create Matches</p>
