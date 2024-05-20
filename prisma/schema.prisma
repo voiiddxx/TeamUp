@@ -15,6 +15,7 @@ datasource db {
 
 
 
+
 model User {
   userid Int @id @default(autoincrement())
   clerkId String
@@ -27,6 +28,9 @@ model User {
   wonmatch Int
   loses Int?
   tied Int?
+  captains Team[]
+  mymatches Match[]
+  createdTeam Team[] @relation("createdTeam")
 }
 
 model Team {
@@ -34,9 +38,12 @@ model Team {
   name String
   punchline String
   logo String
+  location String
   members User[] @relation("teamMembers")
   rating Int?
   feedbacks String[]
+  captain User @relation(fields: [captainId] , references: [userid])
+  captainId Int
   won Int?
   lost Int? 
   tie Int?
@@ -46,6 +53,10 @@ model Team {
   joinedMatch Match[] @relation("teamJoinedmatch")
   winningteam Match[] @relation("winningteam")
   loosedMatch Match[] @relation("loosedMatch")
+  inviting Invite[]
+  teamcode String
+  owneredby User @relation("createdTeam" , fields: [ownerid] , references: [userid])
+  ownerid Int
 }
 
 
@@ -62,19 +73,21 @@ model Match {
   matchid Int @id @default(autoincrement())
   createdTeam Team @relation(fields: [createdteamId] , references: [teamid])
   createdteamId Int
-  Joinedteam Team @relation("teamJoinedmatch" , fields: [joinedteamid] , references: [teamid])
-  joinedteamid Int
+  Joinedteam Team? @relation("teamJoinedmatch" , fields: [joinedteamid] , references: [teamid])
+  joinedteamid Int?
   location String
   time DateTime
   bet Int
   status String
   Category Sportcategory @relation(fields: [matchCategoryId] , references: [sportcategoryid])
   matchCategoryId Int
-  winningteam Team @relation("winningteam" , fields: [winningteamid] , references: [teamid])
-  winningteamid Int
-  looserteam Team @relation("loosedMatch" , fields: [looserteamid] , references: [teamid])
-  looserteamid Int
+  winningteam Team? @relation("winningteam" , fields: [winningteamid] , references: [teamid])
+  winningteamid Int?
+  looserteam Team? @relation("loosedMatch" , fields: [looserteamid] , references: [teamid])
+  looserteamid Int?
   invites Invite[]
+  owner User @relation(fields: [ownerid] , references: [userid])
+  ownerid Int
 }
 
 
@@ -82,6 +95,8 @@ model Invite {
   inviteid Int @id @default(autoincrement())
   message String
   inviteFormatch Match @relation( fields: [inviteformatchid] , references: [matchid])
+  InvitingTeam Team @relation(fields: [invitingTeamId] , references: [teamid])
+  invitingTeamId Int
   inviteformatchid Int
   
 }

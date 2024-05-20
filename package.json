@@ -9,11 +9,32 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.0.8",
+    "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.13.0",
+    "@radix-ui/react-alert-dialog": "^1.0.5",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-select": "^2.0.0",
+    "@radix-ui/react-slot": "^1.0.2",
+    "@react-email/components": "0.0.17",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "create-email": "^0.0.25",
+    "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "prisma": "^5.13.0",
+    "punycode": "^2.3.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-email": "2.1.2",
+    "react-hook-form": "^7.51.4",
+    "socket.io": "*",
+    "sonner": "^1.4.41",
+    "svix": "^1.24.0",
+    "tailwind-merge": "^2.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
