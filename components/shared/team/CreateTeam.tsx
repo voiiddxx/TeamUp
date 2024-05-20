@@ -25,7 +25,7 @@ import { getAllCategoryAction } from "@/lib/actions/category.action";
 import { CreateTeamAction } from "@/lib/actions/team.action";
 import { convertToBase64Image } from "@/lib/ConvertBase64";
 import Image from "next/image";
-import { BoxIcon, Images } from "lucide-react";
+import { BoxIcon, Images, Search } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -209,7 +209,18 @@ const CreateTeam = () => {
         </div>
         {/* right div */}
         <div className="h-full flex w-1/2 flex-col px-8 ">
+          {/* team code component  */}
           <input className="outline-none border-[1px] border-stone-700 bg-stone-800 w-full h-12 px-4 " type="text" placeholder="Your team code" />
+          {/* team code component end */}
+
+          {/* choose captain component */}
+          <div>
+            <div className="flex gap-2 h-12 w-full bg-stone-800 mt-8 border-[1px] border-stone-700 text-zinc-400 items-center px-4" >
+              <Search size={18} strokeWidth={1.5} />
+              <input className="bg-transparent outline-none border-none text-sm" type="text" placeholder="Choose Your Captain" />
+            </div>
+          </div>
+          {/* choose captain component end */}
         </div>
         {/* right component end */}
       </div>
