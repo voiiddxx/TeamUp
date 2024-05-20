@@ -25,7 +25,7 @@ import { getAllCategoryAction } from "@/lib/actions/category.action";
 import { CreateTeamAction } from "@/lib/actions/team.action";
 import { convertToBase64Image } from "@/lib/ConvertBase64";
 import Image from "next/image";
-import { BoxIcon, Images } from "lucide-react";
+import { BoxIcon, Images, Search } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -121,7 +121,7 @@ const CreateTeam = () => {
       <div className="min-h-screen w-full px-16 py-8 flex ">
         {/* team name component */}
         {/* left div */}
-        <div className="flex w-1/2 flex-col ">
+        <div className="flex w-1/2 flex-col border-r border-zinc-700">
           <div className="">
             <input
               className="outline-none border-none  text-white bg-transparent w-full text-2xl placeholder:text-white"
@@ -133,7 +133,7 @@ const CreateTeam = () => {
           {/* team tagline component  */}
           <div className="mt-4">
             <textarea
-              className="bg-transparent w-full text-blue-300 focus:border-none active:border-none border-none outline-none"
+              className="bg-transparent w-[550px] text-blue-300 focus:border-none active:border-none border-none outline-none"
               placeholder="Your Team Tagline"
             />
           </div>
@@ -151,7 +151,7 @@ const CreateTeam = () => {
             />
             {!teamLogo && (
               <div
-                className="h-[300px] w-[550px] rounded-md bg-stone-900 flex items-center justify-center flex-col"
+                className="h-[300px] w-[550px] rounded-md bg-stone-900 flex items-center justify-center flex-col border-[1px] border-stone-700"
                 onClick={() => {
                   ImageButton.current.click();
                 }}
@@ -203,12 +203,26 @@ const CreateTeam = () => {
 
           {/* team location component */}
           <div>
-            <input className="border-none outline-none text-white bg-transparent mt-8 placeholder:text-zinc-300" placeholder="Enter Your Location" type="text" />
+            <input className="border-none outline-none text-white bg-transparent mt-8 placeholder:text-zinc-500" placeholder="Enter Your Location" type="text" />
           </div>
           {/* team location component end */}
         </div>
         {/* right div */}
-        <div className="h-full flex w-1/2 "></div>
+        <div className="h-full flex w-1/2 flex-col px-8 ">
+          {/* team code component  */}
+          <input className="outline-none border-[1px] border-stone-700 bg-stone-800 w-full h-12 px-4 " type="text" placeholder="Your team code" />
+          {/* team code component end */}
+
+          {/* choose captain component */}
+          <div>
+            <div className="flex gap-2 h-12 w-full bg-stone-800 mt-8 border-[1px] border-stone-700 text-zinc-400 items-center px-4" >
+              <Search size={18} strokeWidth={1.5} />
+              <input className="bg-transparent outline-none border-none text-sm" type="text" placeholder="Choose Your Captain" />
+            </div>
+          </div>
+          {/* choose captain component end */}
+        </div>
+        {/* right component end */}
       </div>
       {/* main form component end */}
 

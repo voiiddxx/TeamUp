@@ -128,3 +128,30 @@ export const UpdateProfileAction = async ({ data, userId }: UpdateUserParams) =>
 
 
 
+
+
+// server action for searching the user with query
+
+export const SearchUserWithQueryAction = async (query: string)=>{
+    if(!query){
+        return JSON.parse(JSON.stringify({message:"Empty Data" , status:400}));
+    }
+    try {
+        const res = await prisma.user.findMany({
+            where:{
+                OR:[
+                    {
+                        username:{contains:query , mode:'insensitive'},
+                    },
+                ]
+            }
+        });
+        if(!res){
+            return JSON.parse(JSON.stringify({message:"No User Found" , status:404}));
+        }
+        return JSON.parse(JSON.stringify({data:res , status:200}));
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
