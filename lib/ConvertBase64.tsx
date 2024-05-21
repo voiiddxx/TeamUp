@@ -15,7 +15,6 @@ export const convertToBase64Image = (image : any)=>{
         }
         reader.readAsDataURL(file);
     }
-    console.log(ImageData);
     
     return ImageData;
 }
