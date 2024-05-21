@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { poppins } from "@/components/ui/font";
 
-const poppins = Poppins({ subsets: ["latin"] ,
-  weight:["100" ,  "200" , "300" , "400" , "500" , "600" , "700" , "800" , "900"]
- });
 
 export const metadata: Metadata = {
   title: "TeampUp",
@@ -20,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
      <ClerkProvider>
-     <body className={poppins.className}>{children}</body>
+     <body className={`${poppins.className} antialiased`}  >{children}</body>
      </ClerkProvider>
     </html>
   );
