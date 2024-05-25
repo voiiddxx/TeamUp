@@ -8,7 +8,7 @@ export default async function Home() {
   
   const user = await currentUser();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between">
      <Hero clerkId={user?.id} />
     </main>
   );
