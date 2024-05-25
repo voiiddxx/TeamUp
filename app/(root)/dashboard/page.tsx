@@ -6,7 +6,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <div className=' h-screen w-full bg-stone-950 ' >
+    <div className=' h-screen w-full bg-stone-950' >
       <DashboardnavBar/>
         {/* <Link href={'/dashboard/team/create'} ><Button>Create Team</Button></Link>
         <JoinTeam/> */}

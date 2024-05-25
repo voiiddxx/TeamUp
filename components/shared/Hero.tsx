@@ -4,6 +4,7 @@ import { gerUserasPerClerkId } from '@/lib/actions/user.action'
 import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { Button } from '../ui/button'
+import { lusitiana } from '../ui/font'
 
     type HeroPagePros = {
         clerkId:any
@@ -25,6 +26,7 @@ const Hero = ({clerkId}:HeroPagePros) => {
     getUser();
     } , [])
   return (
+
     <>
     
 
@@ -35,6 +37,8 @@ const Hero = ({clerkId}:HeroPagePros) => {
 
             <p className='text-8xl font-extrabold mt-10'>THE BEST STORIES<br></br> DESERVE TO BE TOLD</p>
             <div className='mt-4' >
+    <div className='min-h-screen w-full flex justify-center items-center flex-col' >
+        <h1 className={`${lusitiana.className}`} >This project is under developement mode</h1>
         <Link href={`/dashboard`} >
      <Button className='text-xl'>Go to dashboard</Button>
      </Link>

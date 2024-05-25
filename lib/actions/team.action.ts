@@ -313,9 +313,6 @@ export const DeleteTeamAction = async ({ data }: DeleteTeamParams) => {
 
         return JSON.parse(JSON.stringify({ data: updateCaptainRes, status: 200 }));
 
-
-
-
     } catch (error) {
 
     }
