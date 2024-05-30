@@ -95,9 +95,9 @@ const CreateTeam = () => {
     setTimeout(() => {
       setIsLoading(false);
       toast.success("Captain Appointed");
-      
+      setTeamCaptain(user);
     }, 2000);
-    setTeamCaptain(user);
+    
   }
 
 
@@ -202,7 +202,8 @@ const CreateTeam = () => {
           {/* team code component end */}
 
           {/* choose captain component */}
-          <div>
+          {
+            TeamCaptain == null ? <div>
             <div className="flex gap-2 h-12 w-full bg-stone-800 mt-8 border-[1px] border-stone-700 border-b-0 text-zinc-400 items-center px-4" >
               <Search size={18} strokeWidth={1.5} />
               <input onChange={(e)=>{
@@ -275,7 +276,18 @@ const CreateTeam = () => {
 
 
 
+          </div> : <div className="mt-4 relative" >
+            <h1 className="text-zinc-400 text-sm mt-4" >Team Captain</h1>
+            
+            
+            <div className="h-20 w-20 mt-4 mb-2 peer bg-white rounded-full transition-all" >
+
+            </div>
+            <div className="h-9 peer-hover:visible invisible transition-all duration-150 w-24 flex justify-center items-center text-white bg-opacity-15  bg-zinc-600 rounded-full" >
+              <p className="text-xs" >Nikhil Kumar</p>
+            </div>
           </div>
+          }
           {/* choose captain component end */}
           <div className="mt-8" >
               <p className="text-sm font-medium text-zinc-400" >Add Team Members</p>
