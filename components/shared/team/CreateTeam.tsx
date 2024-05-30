@@ -25,7 +25,7 @@ import { getAllCategoryAction } from "@/lib/actions/category.action";
 import { CreateTeamAction } from "@/lib/actions/team.action";
 import { convertToBase64Image } from "@/lib/ConvertBase64";
 import Image from "next/image";
-import { BoxIcon, Images, Search } from "lucide-react";
+import { BoxIcon, ChevronRight, Images, Search, Users } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2).max(50),
@@ -114,6 +114,35 @@ const CreateTeam = () => {
     };
     GetCategory();
   }, []);
+
+
+  const players = [
+    {
+      name:"void",
+      email:"nikhil@gmail.com",
+      role:"wicketkeeper"
+    },
+    {
+      name:"sanjay",
+      email:"nikhil@gmail.com",
+      role:"wicketkeeper"
+    },
+    {
+      name:"harshit",
+      email:"nikhil@gmail.com",
+      role:"wicketkeeper"
+    },
+    {
+      name:"raman",
+      email:"nikhil@gmail.com",
+      role:"wicketkeeper"
+    },
+    {
+      name:"karan",
+      email:"nikhil@gmail.com",
+      role:"wicketkeeper"
+    },
+  ]
 
   return (
     <>
@@ -219,8 +248,51 @@ const CreateTeam = () => {
               <Search size={18} strokeWidth={1.5} />
               <input className="bg-transparent outline-none border-none text-sm" type="text" placeholder="Choose Your Captain" />
             </div>
+
+
+            {/* captain list section */}
+            <div className="h-80 w-full flex justify-between items-center bg-stone-800" >
+              {/* left div */}
+              <div className="h-80 w-1/2 px-4 py-3" >
+                <p className="text-xs font-medium text-zinc-500" >all players</p>
+
+                <div className="h-64  flex flex-col gap-2 mt-4" >
+                  {
+                    players.map((curr:any)=>{
+                      return <div className="h-14 group w-full flex justify-between items-center gap-2 hover:bg-stone-900 transition-all bg-opacity-5 px-2 rounded-md" >
+                        {/* image div  */}
+                        <div className="flex gap-2 items-center text-zinc-200 text-xs font-medium" >
+                        <div className="h-8 w-8 rounded-full bg-zinc-700" >
+                        </div>
+                        <p className="text-sm text-zinc-300 font-light" >{curr.name}</p>
+                        </div>
+                        {/* image div end */}
+                        {/* right div */}
+                        <div className="invisible group-hover:visible transition-all" >
+                          <ChevronRight className="text-zinc-600" strokeWidth={1} />
+                        </div>
+                      </div>
+                    })
+                  }
+                </div>
+
+              </div>
+              {/* right div */}
+
+            </div>
+            {/* captain list section end */}
+
+
+
           </div>
           {/* choose captain component end */}
+          <div className="mt-8" >
+              <p className="text-sm font-medium text-zinc-400" >Add Team Members</p>
+          </div>
+
+          {/* add team members div start */}
+          
+          {/* add team members div start end */}
         </div>
         {/* right component end */}
       </div>
