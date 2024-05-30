@@ -11,7 +11,7 @@ import {
 import { getAllCategoryAction } from "@/lib/actions/category.action";
 import { convertToBase64Image } from "@/lib/ConvertBase64";
 import Image from "next/image";
-import { BoxIcon, ChevronRight, Images, Loader, Search, Users } from "lucide-react";
+import { BoxIcon, ChevronRight, Images, Loader, Search, Users, X } from "lucide-react";
 import { SearchUserWithQueryAction } from "@/lib/actions/user.action";
 import { Button } from "@/components/ui/button";
 import { Toaster, toast } from 'sonner'
@@ -100,6 +100,12 @@ const CreateTeam = () => {
     
   }
 
+
+  // method for removing the captain appointment
+
+  const removeCaptain = ()=>{
+    setTeamCaptain(null);
+  }
 
  
   return (
@@ -280,11 +286,14 @@ const CreateTeam = () => {
             <h1 className="text-zinc-400 text-sm mt-4" >Team Captain</h1>
             
             
-            <div className="h-20 w-20 mt-4 mb-2 peer bg-white rounded-full transition-all" >
-
+            <div className="h-20 w-20 mt-4 mb-2 peer bg-white rounded-full transition-all relative" >
+            <Image className="h-full w-full rounded-full" src={ActiveCaptain.avatar} height={1500} width={1500} alt="image of user" />
+            <div onClick={removeCaptain} className="bg-zinc-800 bg-opacity-95 absolute p-[2px] flex items-center justify-center cursor-pointer rounded-full top-0 -right-0" >
+              <X className="text-red-400" size={20} strokeWidth={1.4} />
             </div>
-            <div className="h-9 peer-hover:visible invisible transition-all duration-150 w-24 flex justify-center items-center text-white bg-opacity-15  bg-zinc-600 rounded-full" >
-              <p className="text-xs" >Nikhil Kumar</p>
+            </div>
+            <div className="h-9  transition-all duration-150 w-24 flex justify-center items-center text-white bg-opacity-15  bg-zinc-600 rounded-full" >
+              <p className="text-xs" >{ActiveCaptain.username}</p>
             </div>
           </div>
           }
