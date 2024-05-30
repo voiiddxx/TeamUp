@@ -1,19 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { z } from "zod";
+
 import {
   Select,
   SelectContent,
@@ -22,11 +9,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getAllCategoryAction } from "@/lib/actions/category.action";
-import { CreateTeamAction } from "@/lib/actions/team.action";
 import { convertToBase64Image } from "@/lib/ConvertBase64";
 import Image from "next/image";
 import { BoxIcon, ChevronRight, Images, Search, Users } from "lucide-react";
 import { SearchUserWithQueryAction } from "@/lib/actions/user.action";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -83,49 +70,22 @@ const CreateTeam = () => {
         console.log(res.data);
       }
     };
-
     GetCategory();
   }, []);
 
 
-   const handleSearchChange = async (e:any)=>{
-    console.log("func working");
+   const handleSearchChange = async (e:any)=>{ 
     
+     if(e.target.value !=''){
       const data = await SearchUserWithQueryAction(e.target.value);
-      console.log(data);
       setUserList(data.data);
-      
+     }else{
+      setUserList([]);
+     }
    }
 
 
-  const players = [
-    {
-      name:"void",
-      email:"nikhil@gmail.com",
-      role:"wicketkeeper"
-    },
-    {
-      name:"sanjay",
-      email:"nikhil@gmail.com",
-      role:"wicketkeeper"
-    },
-    {
-      name:"harshit",
-      email:"nikhil@gmail.com",
-      role:"wicketkeeper"
-    },
-    {
-      name:"raman",
-      email:"nikhil@gmail.com",
-      role:"wicketkeeper"
-    },
-    {
-      name:"karan",
-      email:"nikhil@gmail.com",
-      role:"wicketkeeper"
-    },
-  ]
-
+ 
   return (
     <>
       {/* main form component */}
@@ -235,12 +195,13 @@ const CreateTeam = () => {
 
 
             {/* captain list section */}
-            <div className="h-80 border-[1px] border-stone-700 border-t-0 w-full flex justify-between items-center bg-stone-800" >
+            {
+              UserList.length != 0 && (<div className="max-h-80 pb-4 border-[1px] border-stone-700 border-t-0 w-full flex justify-between items-center bg-stone-800" >
               {/* left div */}
-              <div className="h-80 w-1/2 px-4 py-3 border-r border-zinc-700" >
+              <div className="max-h-80 w-1/2 px-4 py-3 border-r border-zinc-700" >
                 <p className="text-xs font-medium text-zinc-500" >all players</p>
 
-                <div className="h-64  flex flex-col gap-2 mt-4" >
+                <div className="max-h-64  flex flex-col gap-2 mt-4" >
                   {
                     UserList.map((curr:any)=>{
                       return <div onMouseEnter={()=>{
@@ -274,11 +235,21 @@ const CreateTeam = () => {
                 </div>
                 <h1 className="text-lg font-medium text-zinc-200 mt-4" >{ActiveCaptain.username}</h1>
                 <p className="text-zinc-600 font-light text-sm text-balance " >{ActiveCaptain.email}</p>
+
+                <div className="flex gap-4 items-center flex-col mt-2" >
+                  <p className="text-zinc-200 text-[10px] tracking-wide font-light" ><span className="font-medium" >Role : {' '} </span>Right Handed Batsman</p>
+                </div>
+                <div>
+                  <div className="h-8 px-4 mt-4 rounded-full bg-green-400  flex items-center justify-center text-stone-900 hover:scale-105 transition-all cursor-pointer" >
+                <p className="text-xs font-medium " >Appoint Captain</p>
+                  </div>
+                </div>
             </div>
               )
              }
 
-            </div>
+            </div>)
+            }
             {/* captain list section end */}
 
 

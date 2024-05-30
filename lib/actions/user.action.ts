@@ -144,6 +144,9 @@ export const SearchUserWithQueryAction = async (query: string)=>{
                         username:{contains:query , mode:'insensitive'},
                     },
                 ]
+            },
+            include:{
+                mymatches:true,
             }
         });
         if(!res){
