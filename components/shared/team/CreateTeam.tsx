@@ -249,8 +249,10 @@ const CreateTeam = () => {
                         {/* image div  */}
                         <div className="flex gap-2 items-center text-zinc-200 text-xs font-medium" >
                         <div className="h-8 w-8 rounded-full bg-zinc-700" >
+                        <Image className="h-full w-full object-cover rounded-full" src={curr.avatar} height={1500} width={1500} alt="user image" />
+
                         </div>
-                        <p className="text-sm text-zinc-300 font-light" >{curr.name}</p>
+                        <p className="text-sm text-zinc-300 font-light" >{curr.username}</p>
                         </div>
                         {/* image div end */}
                         {/* right div */}
@@ -268,8 +270,9 @@ const CreateTeam = () => {
               ActiveCaptain && (
                 <div className="h-full w-1/2 flex items-center justify-center flex-col" >
                 <div className="h-20 w-20 rounded-full bg-zinc-700" >
+                  <Image className="h-full w-full object-cover rounded-full" src={ActiveCaptain.avatar} height={1500} width={1500} alt="user image" />
                 </div>
-                <h1 className="text-lg font-medium text-zinc-200 mt-4" >{ActiveCaptain.name}</h1>
+                <h1 className="text-lg font-medium text-zinc-200 mt-4" >{ActiveCaptain.username}</h1>
                 <p className="text-zinc-600 font-light text-sm text-balance " >{ActiveCaptain.email}</p>
             </div>
               )
