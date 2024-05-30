@@ -11,9 +11,10 @@ import {
 import { getAllCategoryAction } from "@/lib/actions/category.action";
 import { convertToBase64Image } from "@/lib/ConvertBase64";
 import Image from "next/image";
-import { BoxIcon, ChevronRight, Images, Search, Users } from "lucide-react";
+import { BoxIcon, ChevronRight, Images, Loader, Search, Users } from "lucide-react";
 import { SearchUserWithQueryAction } from "@/lib/actions/user.action";
 import { Button } from "@/components/ui/button";
+import { Toaster, toast } from 'sonner'
 
 
 
@@ -25,6 +26,8 @@ const CreateTeam = () => {
   const [ActiveCaptain, setActiveCaptain] = useState<any>(null);
   const [query, setquery] = useState<string>('');
   const [UserList, setUserList] = useState<any>([]);
+  const [TeamCaptain, setTeamCaptain] = useState<any>(null);
+  const [IsLoading, setIsLoading] = useState<boolean>(false);
 
   // convert image into base64
 
@@ -53,6 +56,7 @@ const CreateTeam = () => {
 
   // adding user when mouse enters
   const handleMouseEnters = (user : any)=>{
+    setIsLoading(false);
     setActiveCaptain(user);
   }
   const hanldeMouseLeave = ()=>{
@@ -85,11 +89,24 @@ const CreateTeam = () => {
    }
 
 
+  //  handling on click for captain selection
+  const handleCaptainOnclick =  (user:any)=>{
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      toast.success("Captain Appointed");
+      
+    }, 2000);
+    setTeamCaptain(user);
+  }
+
+
  
   return (
     <>
       {/* main form component */}
       <div className="min-h-screen w-full px-16 py-8 flex ">
+      <Toaster closeButton className="bg-zinc-800"  richColors position="bottom-right" />
         {/* team name component */}
         {/* left div */}
         <div className="flex w-1/2 flex-col border-r border-zinc-700">
@@ -240,8 +257,12 @@ const CreateTeam = () => {
                   <p className="text-zinc-200 text-[10px] tracking-wide font-light" ><span className="font-medium" >Role : {' '} </span>Right Handed Batsman</p>
                 </div>
                 <div>
-                  <div className="h-8 px-4 mt-4 rounded-full bg-green-400  flex items-center justify-center text-stone-900 hover:scale-105 transition-all cursor-pointer" >
-                <p className="text-xs font-medium " >Appoint Captain</p>
+                  <div onClick={()=>{
+                    handleCaptainOnclick(ActiveCaptain);
+                  }} className="h-8 px-4 mt-4 rounded-full bg-green-400  flex items-center justify-center text-stone-900 hover:scale-105 transition-all cursor-pointer" >
+                {
+                  IsLoading == true ? <Loader className="animate-spin transition-all" strokeWidth={1.5} size={15}  /> : <p className="text-xs font-medium " >Appoint Captain</p>
+                }
                   </div>
                 </div>
             </div>
