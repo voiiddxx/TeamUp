@@ -80,7 +80,7 @@ const CreateTeam = () => {
     setActiveCaptain(user);
   }
   const hanldeMouseLeave = ()=>{
-    setActiveCaptain(null);
+    // setActiveCaptain(null);
   }
 
   // 2. Define a submit handler.
@@ -280,7 +280,7 @@ const CreateTeam = () => {
                         </div>
                         {/* image div end */}
                         {/* right div */}
-                        <div className="invisible group-hover:visible transition-all" >
+                        <div className="invisible group-hover:visible group-hover:translate-x-1 transition-all" >
                           <ChevronRight className="text-zinc-600" strokeWidth={1} />
                         </div>
                       </div>
@@ -296,7 +296,7 @@ const CreateTeam = () => {
                 <div className="h-20 w-20 rounded-full bg-zinc-700" >
                 </div>
                 <h1 className="text-lg font-medium text-zinc-200 mt-4" >{ActiveCaptain.name}</h1>
-                <p className="text-zinc-600 font-light text-sm text-balance " >nikhildesign00@gmail.com</p>
+                <p className="text-zinc-600 font-light text-sm text-balance " >{ActiveCaptain.email}</p>
             </div>
               )
              }
