@@ -26,13 +26,9 @@ import { CreateTeamAction } from "@/lib/actions/team.action";
 import { convertToBase64Image } from "@/lib/ConvertBase64";
 import Image from "next/image";
 import { BoxIcon, ChevronRight, Images, Search, Users } from "lucide-react";
+import { SearchUserWithQueryAction } from "@/lib/actions/user.action";
 
-const formSchema = z.object({
-  name: z.string().min(2).max(50),
-  moto: z.string().min(2).max(50),
-  location: z.string().min(2).max(50),
-  teamcode: z.string().min(2).max(50),
-});
+
 
 const CreateTeam = () => {
   const [Sportscategory, setSportscategory] = useState<any>(null);
@@ -40,6 +36,8 @@ const CreateTeam = () => {
   const ImageButton = useRef<any>(null);
   const [teamLogo, setteamLogo] = useState<any>(null);
   const [ActiveCaptain, setActiveCaptain] = useState<any>(null);
+  const [query, setquery] = useState<string>('');
+  const [UserList, setUserList] = useState<any>([]);
 
   // convert image into base64
 
@@ -63,16 +61,7 @@ const CreateTeam = () => {
     setteamLogo(data);
   };
 
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      moto: "",
-      teamcode: "",
-      location: "",
-    },
-  });
+  
 
 
   // adding user when mouse enters
@@ -83,35 +72,7 @@ const CreateTeam = () => {
     // setActiveCaptain(null);
   }
 
-  // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    // team logo pending sending the dummy text instead of sending the image
-
-    if (!values) {
-      alert("No value added");
-    }
-    const user = localStorage.getItem("x-auth-user");
-    const userId = +user!;
-    const res = await CreateTeamAction({
-      data: {
-        caption: values.moto,
-        locaton: values.location,
-        name: values.name,
-        teamcode: values.teamcode,
-        logo: "Logotext",
-        captainId: userId,
-        categoryId: 2,
-        userid: userId,
-      },
-    });
-    if (res.status == 200) {
-      alert("Team Created");
-    } else {
-      alert("Caught some error");
-    }
-    console.log(values);
-  }
-
+  
   useEffect(() => {
     const GetCategory = async () => {
       const res = await getAllCategoryAction();
@@ -122,8 +83,19 @@ const CreateTeam = () => {
         console.log(res.data);
       }
     };
+
     GetCategory();
   }, []);
+
+
+   const handleSearchChange = async (e:any)=>{
+    console.log("func working");
+    
+      const data = await SearchUserWithQueryAction(e.target.value);
+      console.log(data);
+      setUserList(data.data);
+      
+   }
 
 
   const players = [
@@ -256,7 +228,9 @@ const CreateTeam = () => {
           <div>
             <div className="flex gap-2 h-12 w-full bg-stone-800 mt-8 border-[1px] border-stone-700 border-b-0 text-zinc-400 items-center px-4" >
               <Search size={18} strokeWidth={1.5} />
-              <input className="bg-transparent outline-none border-none text-sm" type="text" placeholder="Choose Your Captain" />
+              <input onChange={(e)=>{
+                handleSearchChange(e);
+              }} className="bg-transparent outline-none border-none text-sm" type="text" placeholder="Choose Your Captain" />
             </div>
 
 
@@ -268,7 +242,7 @@ const CreateTeam = () => {
 
                 <div className="h-64  flex flex-col gap-2 mt-4" >
                   {
-                    players.map((curr:any)=>{
+                    UserList.map((curr:any)=>{
                       return <div onMouseEnter={()=>{
                         handleMouseEnters(curr)
                       }}  onMouseLeave={hanldeMouseLeave} className="h-14 group w-full flex justify-between items-center gap-2 hover:bg-stone-900 transition-all bg-opacity-5 px-2 rounded-md" >
@@ -320,109 +294,6 @@ const CreateTeam = () => {
       </div>
       {/* main form component end */}
 
-      <div className="min-h-screen w-full flex flex-col justify-center items-center">
-        <div>
-          <h1>Create Your Team Now</h1>
-        </div>
-
-        <div>
-          {/* react hook form for the creating the team */}
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="enter your team name" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="moto"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your moto" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <div>
-                <Input type="file" />
-              </div>
-              <Select
-                onValueChange={(val) => {
-                  setSelectedCategory(val);
-                }}
-              >
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select Sports Categotry" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Sportscategory && (
-                    <div>
-                      {Sportscategory.map((curr: any) => {
-                        return (
-                          <SelectItem value={curr.name}>{curr.name}</SelectItem>
-                        );
-                      })}
-                    </div>
-                  )}
-                </SelectContent>
-              </Select>
-              <FormField
-                control={form.control}
-                name="location"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Team Location" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="teamcode"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter The Team Code" {...field} />
-                    </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button className="w-full" type="submit">
-                Submit
-              </Button>
-            </form>
-          </Form>
-        </div>
-      </div> 
     </>
   );
 };
