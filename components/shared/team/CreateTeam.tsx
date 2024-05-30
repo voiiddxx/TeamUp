@@ -244,14 +244,14 @@ const CreateTeam = () => {
 
           {/* choose captain component */}
           <div>
-            <div className="flex gap-2 h-12 w-full bg-stone-800 mt-8 border-[1px] border-stone-700 text-zinc-400 items-center px-4" >
+            <div className="flex gap-2 h-12 w-full bg-stone-800 mt-8 border-[1px] border-stone-700 border-b-0 text-zinc-400 items-center px-4" >
               <Search size={18} strokeWidth={1.5} />
               <input className="bg-transparent outline-none border-none text-sm" type="text" placeholder="Choose Your Captain" />
             </div>
 
 
             {/* captain list section */}
-            <div className="h-80 w-full flex justify-between items-center bg-stone-800" >
+            <div className="h-80 border-[1px] border-stone-700 border-t-0 w-full flex justify-between items-center bg-stone-800" >
               {/* left div */}
               <div className="h-80 w-1/2 px-4 py-3" >
                 <p className="text-xs font-medium text-zinc-500" >all players</p>
