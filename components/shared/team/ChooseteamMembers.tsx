@@ -1,5 +1,5 @@
 "use client";
-import { Plus, PlusCircle } from "lucide-react";
+import { Plus, PlusCircle, Search, Users } from "lucide-react";
 import React, { useState } from "react";
 import {
     Dialog,
@@ -25,10 +25,20 @@ const ChooseteamMembers = () => {
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
               <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+               Select your team members
+               <div className="mt-4 w-full border-b border-zinc-800 flex gap-2 items-center" >
+                <Search className="text-zinc-700" strokeWidth={1.5} />
+                <input type="text" className="h-10 w-full bg-transparent " placeholder="Search..."  />
+               </div>
+
+               {
+                Players.length != 0 ? <div></div> : <div className="h-[200px] flex justify-center items-center flex-col" >
+                    <Users strokeWidth={1.5} className="text-zinc-500" />
+                    <p className="text-zinc-300 font-medium mt-4" >Find your players </p>
+                    <p className="text-zinc-500 font-medium mt-4 text-xs" >Find your team members by searching and build your strong team</p>
+                </div> 
+               }
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
