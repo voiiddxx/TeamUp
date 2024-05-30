@@ -39,6 +39,7 @@ const CreateTeam = () => {
   const [SelectedCategory, setSelectedCategory] = useState<any>(null);
   const ImageButton = useRef<any>(null);
   const [teamLogo, setteamLogo] = useState<any>(null);
+  const [ActiveCaptain, setActiveCaptain] = useState<any>(null);
 
   // convert image into base64
 
@@ -72,6 +73,15 @@ const CreateTeam = () => {
       location: "",
     },
   });
+
+
+  // adding user when mouse enters
+  const handleMouseEnters = (user : any)=>{
+    setActiveCaptain(user);
+  }
+  const hanldeMouseLeave = ()=>{
+    setActiveCaptain(null);
+  }
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -231,7 +241,7 @@ const CreateTeam = () => {
           {/* team category component end */}
 
           {/* team location component */}
-          <div>
+          {/* <div>
             <input className="border-none outline-none text-white bg-transparent mt-8 placeholder:text-zinc-500" placeholder="Enter Your Location" type="text" />
           </div>
           {/* team location component end */}
@@ -253,13 +263,15 @@ const CreateTeam = () => {
             {/* captain list section */}
             <div className="h-80 border-[1px] border-stone-700 border-t-0 w-full flex justify-between items-center bg-stone-800" >
               {/* left div */}
-              <div className="h-80 w-1/2 px-4 py-3" >
+              <div className="h-80 w-1/2 px-4 py-3 border-r border-zinc-700" >
                 <p className="text-xs font-medium text-zinc-500" >all players</p>
 
                 <div className="h-64  flex flex-col gap-2 mt-4" >
                   {
                     players.map((curr:any)=>{
-                      return <div className="h-14 group w-full flex justify-between items-center gap-2 hover:bg-stone-900 transition-all bg-opacity-5 px-2 rounded-md" >
+                      return <div onMouseEnter={()=>{
+                        handleMouseEnters(curr)
+                      }}  onMouseLeave={hanldeMouseLeave} className="h-14 group w-full flex justify-between items-center gap-2 hover:bg-stone-900 transition-all bg-opacity-5 px-2 rounded-md" >
                         {/* image div  */}
                         <div className="flex gap-2 items-center text-zinc-200 text-xs font-medium" >
                         <div className="h-8 w-8 rounded-full bg-zinc-700" >
@@ -278,6 +290,16 @@ const CreateTeam = () => {
 
               </div>
               {/* right div */}
+             {
+              ActiveCaptain && (
+                <div className="h-full w-1/2 flex items-center justify-center flex-col" >
+                <div className="h-20 w-20 rounded-full bg-zinc-700" >
+                </div>
+                <h1 className="text-lg font-medium text-zinc-200 mt-4" >{ActiveCaptain.name}</h1>
+                <p className="text-zinc-600 font-light text-sm text-balance " >nikhildesign00@gmail.com</p>
+            </div>
+              )
+             }
 
             </div>
             {/* captain list section end */}
@@ -400,7 +422,7 @@ const CreateTeam = () => {
             </form>
           </Form>
         </div>
-      </div>
+      </div> 
     </>
   );
 };
