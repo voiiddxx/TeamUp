@@ -15,6 +15,7 @@ import { BoxIcon, ChevronRight, Images, Loader, Search, Users, X } from "lucide-
 import { SearchUserWithQueryAction } from "@/lib/actions/user.action";
 import { Button } from "@/components/ui/button";
 import { Toaster, toast } from 'sonner'
+import ChooseteamMembers from "./ChooseteamMembers";
 
 
 
@@ -303,6 +304,7 @@ const CreateTeam = () => {
           </div>
 
           {/* add team members div start */}
+          <ChooseteamMembers/>
           
           {/* add team members div start end */}
         </div>
