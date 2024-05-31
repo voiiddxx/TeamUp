@@ -40,6 +40,24 @@ const CreateTeam = () => {
   const [TeamMoto, setTeamMoto] = useState<string>("");
   const [teamCode, setteamCode] = useState<string>("");
   const [teamEmail, setteamEmail] = useState<string>('');
+  const [teamLocation, setteamLocation] = useState<string>('')
+
+
+
+
+  // method for creating new team ...onsubmit handler....//
+  
+  const handleSubmit = async ()=>{
+    try {
+        console.log(TeamName , TeamMoto , teamLogo , teamLocation , TeamCaptain , teamCode , SelectedPlayersHome , SelectedCategory );
+        
+    } catch (error) {
+      
+    }
+  }
+
+
+
 
   // convert image into base64
 
@@ -410,6 +428,19 @@ const CreateTeam = () => {
           <p className="text-red-400 mt-2 text-xs font-light invisible peer-invalid:visible" >Invalid email format</p>
           </div>
           {/* team email div end  */}
+
+          {/* team location component start */}
+          <div className="mt-6" >
+          <input
+            onChange={(e) => {
+              setteamLocation(e.target.value);
+            }}
+            className="outline-none border-[1px] text-zinc-400 border-stone-700 bg-stone-800 w-full h-12 px-4 "
+            type="text"
+            placeholder="Location...."
+          />
+          </div>
+          {/* team location component end */}
         </div>
         {/* right component end */}
       </div>
