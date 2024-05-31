@@ -51,7 +51,9 @@ const ChooseteamMembers = ({slectedPlayerHome , setSelectedPlayersHome}:IChooseP
     setisRemoving(curr);
     setTimeout(() => {
     setSelectedPlayersHome((prev: any) => prev.filter((player: any) => player.userid !== curr.userid));
-    setisRemoving(null);
+    setisRemoving({
+      userid:15151215151
+    });
     }, 500);
   }
 

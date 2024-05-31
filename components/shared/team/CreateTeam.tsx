@@ -306,10 +306,7 @@ const CreateTeam = () => {
 
           {/* add team members div start */}
           <ChooseteamMembers slectedPlayerHome={SelectedPlayersHome} setSelectedPlayersHome={setSelectedPlayersHome} />
-          <Button onClick={()=>{
-            console.log(SelectedPlayersHome);
-            
-          }} >Checking</Button>
+      
           
           {/* add team members div start end */}
         </div>
