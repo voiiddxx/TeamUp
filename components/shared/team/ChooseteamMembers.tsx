@@ -16,6 +16,9 @@ import Image from "next/image";
 const ChooseteamMembers = () => {
   const [Players, setPlayers] = useState<any>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
+  const [isRemoving, setisRemoving] = useState<any>({
+    userid:5451554151115
+  });
 
   const [SelectedPlayers, setSelectedPlayers] = useState<any>([]);
 
@@ -40,7 +43,11 @@ const ChooseteamMembers = () => {
   };
 
   const removeSelctedPlayer  = (curr:any)=>{
+    setisRemoving(curr);
+    setTimeout(() => {
     setSelectedPlayers((prev: any) => prev.filter((player: any) => player.userid !== curr.userid));
+    setisRemoving(null);
+    }, 500);
   }
 
   return (
@@ -77,7 +84,8 @@ const ChooseteamMembers = () => {
                         <div className="mt-6 flex items-center gap-4 w-full flex-wrap transition-all" >
                           {
                             SelectedPlayers.map((curr:any)=>{
-                              return <div className=" h-20 w-20 rounded-full bg-zinc-600 transition-all relative" >
+                              const isRemove = isRemoving.userid == curr.userid;
+                              return <div className={`h-20 w-20 rounded-full bg-zinc-600 transition-all relative ${isRemove ?'animate-fadeOut' : ''} `}>
                                 <div onClick={()=>{
                                   removeSelctedPlayer(curr)
                                 }} className="absolute flex items-center justify-center p-1 rounded-full top-1 right-0 bg-zinc-800" >
