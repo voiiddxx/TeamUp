@@ -13,14 +13,19 @@ import { SearchUserWithQueryAction } from "@/lib/actions/user.action";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-const ChooseteamMembers = () => {
+  interface IChoosePlayerProps  {
+    slectedPlayerHome : []
+    setSelectedPlayersHome:any
+  }
+
+const ChooseteamMembers = ({slectedPlayerHome , setSelectedPlayersHome}:IChoosePlayerProps) => {
   const [Players, setPlayers] = useState<any>([]);
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [isRemoving, setisRemoving] = useState<any>({
     userid:5451554151115
-  });
+  }); 
 
-  const [SelectedPlayers, setSelectedPlayers] = useState<any>([]);
+  // const [slectedPlayerHome, setSelectedPlayersHome] = useState<any>([]);
 
   const hanldeInputChangeforplayer = async (e: any) => {
     const data = await SearchUserWithQueryAction(e.target.value);
@@ -34,18 +39,18 @@ const ChooseteamMembers = () => {
       setisLoading(false);
       console.log("this is value of user",user);
       
-    setSelectedPlayers((prev:any)=>[...prev , user]);
+    setSelectedPlayersHome((prev:any)=>[...prev , user]);
     }, 2000);
   };
 
   const chechSelectedorNot = (playerid: any) => {
-    return  SelectedPlayers.some((curr: any) => curr.userid === playerid);
+    return  slectedPlayerHome.some((curr: any) => curr.userid === playerid);
   };
 
   const removeSelctedPlayer  = (curr:any)=>{
     setisRemoving(curr);
     setTimeout(() => {
-    setSelectedPlayers((prev: any) => prev.filter((player: any) => player.userid !== curr.userid));
+    setSelectedPlayersHome((prev: any) => prev.filter((player: any) => player.userid !== curr.userid));
     setisRemoving(null);
     }, 500);
   }
@@ -77,13 +82,13 @@ const ChooseteamMembers = () => {
                 <div>
 
                   {
-                    SelectedPlayers.length > 0 && (
+                    slectedPlayerHome.length > 0 && (
                       <div className="w-full" >
                         <p className="text-sm font-medium text-zinc-600 mt-4" >Selected Players</p>
 
                         <div className="mt-6 flex items-center gap-4 w-full flex-wrap transition-all" >
                           {
-                            SelectedPlayers.map((curr:any)=>{
+                            slectedPlayerHome.map((curr:any)=>{
                               const isRemove = isRemoving.userid == curr.userid;
                               return <div className={`h-20 w-20 rounded-full bg-zinc-600 transition-all relative ${isRemove ?'animate-fadeOut' : ''} `}>
                                 <div onClick={()=>{

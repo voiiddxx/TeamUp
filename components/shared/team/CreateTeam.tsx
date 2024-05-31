@@ -29,6 +29,7 @@ const CreateTeam = () => {
   const [UserList, setUserList] = useState<any>([]);
   const [TeamCaptain, setTeamCaptain] = useState<any>(null);
   const [IsLoading, setIsLoading] = useState<boolean>(false);
+  const [SelectedPlayersHome, setSelectedPlayersHome] = useState<any>([]);
 
   // convert image into base64
 
@@ -304,7 +305,11 @@ const CreateTeam = () => {
           </div>
 
           {/* add team members div start */}
-          <ChooseteamMembers/>
+          <ChooseteamMembers slectedPlayerHome={SelectedPlayersHome} setSelectedPlayersHome={setSelectedPlayersHome} />
+          <Button onClick={()=>{
+            console.log(SelectedPlayersHome);
+            
+          }} >Checking</Button>
           
           {/* add team members div start end */}
         </div>
