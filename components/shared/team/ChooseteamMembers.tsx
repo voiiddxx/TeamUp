@@ -1,5 +1,5 @@
 "use client";
-import { Check, Loader, Plus, PlusCircle, Search, Users } from "lucide-react";
+import { Check, Loader, Plus, PlusCircle, Search, Users, X } from "lucide-react";
 import React, { useState } from "react";
 import {
   Dialog,
@@ -37,9 +37,11 @@ const ChooseteamMembers = () => {
 
   const chechSelectedorNot = (playerid: any) => {
     return  SelectedPlayers.some((curr: any) => curr.userid === playerid);
-    
-    
   };
+
+  const removeSelctedPlayer  = (curr:any)=>{
+    setSelectedPlayers((prev: any) => prev.filter((player: any) => player.userid !== curr.userid));
+  }
 
   return (
     <div>
@@ -66,6 +68,29 @@ const ChooseteamMembers = () => {
               </div>
               {Players.length != 0 ? (
                 <div>
+
+                  {
+                    SelectedPlayers.length > 0 && (
+                      <div className="w-full" >
+                        <p className="text-sm font-medium text-zinc-600 mt-4" >Selected Players</p>
+
+                        <div className="mt-6 flex items-center gap-4 w-full flex-wrap transition-all" >
+                          {
+                            SelectedPlayers.map((curr:any)=>{
+                              return <div className=" h-20 w-20 rounded-full bg-zinc-600 transition-all relative" >
+                                <div onClick={()=>{
+                                  removeSelctedPlayer(curr)
+                                }} className="absolute flex items-center justify-center p-1 rounded-full top-1 right-0 bg-zinc-800" >
+                                  <X className="text-red-400" strokeWidth={1.5} size={15} />
+                                </div>
+                                <Image className=" h-full w-full object-cover rounded-full" src={curr.avatar} height={1500} width={1500} alt="selected player avatar" />
+                              </div>
+                            })
+                          }
+                        </div>
+                      </div>
+                    )
+                  }
                   <p className="text-zinc-600 font-medium mt-4 mb-4">
                     Recent Search...
                   </p>
