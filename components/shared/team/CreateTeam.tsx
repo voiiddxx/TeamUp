@@ -58,7 +58,11 @@ const CreateTeam = () => {
             name:TeamName , teamEmail:teamEmail , locaton:teamLocation , logo:"https://img.freepik.com/free-vector/gradient-basketball-logo_52683-84312.jpg?size=338&ext=jpg&ga=GA1.1.34264412.1717027200&semt=ais_user" , teamcode:teamCode ,  categoryId:SelectedCategory.sportcategoryid , captainId:TeamCaptain.userid , caption:TeamMoto , players:SelectedPlayersHome , userid:+curruser!
           }
         });
-        console.log("This Is Data: " , data);
+        if(data.status == 200){
+          toast.success("Team Created Successfully");
+        }else{
+          toast.error("Some unexpected happens , please try again later")
+        }
         
     } catch (error) {
       
