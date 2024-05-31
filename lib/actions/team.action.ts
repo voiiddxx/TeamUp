@@ -18,6 +18,8 @@ const prisma = new PrismaClient();
 export const CreateTeamAction = async ({ data }: createTeamParams) => {
     try {
         if (!data) return JSON.parse(JSON.stringify({ message: "No Data found", status: 400 }));
+        console.log(data.players);
+        
         const teamRes = await prisma.team.create({
             data: {
                 name: data.name,
@@ -35,7 +37,7 @@ export const CreateTeamAction = async ({ data }: createTeamParams) => {
                 ownerid: data.userid,
                 teamemail:data.teamEmail,
                 members: {
-                    connect: { userid: data.userid }
+                    connect: data.players.map(curr => ({userid:curr.userid}))
                 }
             }
         });
@@ -70,7 +72,6 @@ export const getTeamWithTeamIdAction = async (teamId: number) => {
                 members: true,
                 winningteam: true,
                 captain: true
-
             }
         });
 

@@ -24,6 +24,7 @@ import { SearchUserWithQueryAction } from "@/lib/actions/user.action";
 import { Button } from "@/components/ui/button";
 import { Toaster, toast } from "sonner";
 import ChooseteamMembers from "./ChooseteamMembers";
+import { CreateTeamAction } from "@/lib/actions/team.action";
 
 const CreateTeam = () => {
   const [Sportscategory, setSportscategory] = useState<any>(null);
@@ -49,7 +50,15 @@ const CreateTeam = () => {
   
   const handleSubmit = async ()=>{
     try {
-        console.log(TeamName , TeamMoto , teamLogo , teamLocation , TeamCaptain , teamCode , SelectedPlayersHome , SelectedCategory );
+      const curruser = localStorage.getItem('x-auth-user');
+        console.log(SelectedCategory.sportcategoryid);
+        
+        const data = await CreateTeamAction({
+          data:{
+            name:TeamName , teamEmail:teamEmail , locaton:teamLocation , logo:"https://img.freepik.com/free-vector/gradient-basketball-logo_52683-84312.jpg?size=338&ext=jpg&ga=GA1.1.34264412.1717027200&semt=ais_user" , teamcode:teamCode ,  categoryId:SelectedCategory.sportcategoryid , captainId:TeamCaptain.userid , caption:TeamMoto , players:SelectedPlayersHome , userid:+curruser!
+          }
+        });
+        console.log("This Is Data: " , data);
         
     } catch (error) {
       
@@ -441,6 +450,12 @@ const CreateTeam = () => {
           />
           </div>
           {/* team location component end */}
+
+          {/* form submit button start */}
+          <Button onClick={handleSubmit} className="w-full bg-green-400 text-zinc-900 mt-10 hover:text-zinc-400" >Create Team</Button>
+          {/* form submit button end */}
+
+
         </div>
         {/* right component end */}
       </div>

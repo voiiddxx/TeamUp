@@ -34,6 +34,7 @@ export type createTeamParams = {
         categoryId:number
         userid:number
         teamEmail: string
+        players: any[]
     }
 }
 
