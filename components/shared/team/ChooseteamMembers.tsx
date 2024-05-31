@@ -29,12 +29,16 @@ const ChooseteamMembers = () => {
     setisLoading(true);
     setTimeout(() => {
       setisLoading(false);
+      console.log("this is value of user",user);
+      
+    setSelectedPlayers((prev:any)=>[...prev , user]);
     }, 2000);
-    setSelectedPlayers(user);
   };
 
   const chechSelectedorNot = (playerid: any) => {
-    return SelectedPlayers.some((curr: any) => curr.id === playerid);
+    return  SelectedPlayers.some((curr: any) => curr.userid === playerid);
+    
+    
   };
 
   return (
@@ -66,7 +70,7 @@ const ChooseteamMembers = () => {
                     Recent Search...
                   </p>
                   {Players.map((curr: any) => {
-                    const selected = chechSelectedorNot(curr.id)
+                    const selected = chechSelectedorNot(curr.userid)
                     return (
                       <div className="min-h-14 py-4 w-full flex items-center hover:bg-zinc-800 rounded-md px-2 transition-all justify-between border-b border-zinc-800 group">
                         <div className="flex items-center gap-4">
@@ -84,7 +88,7 @@ const ChooseteamMembers = () => {
                           </p>
                         </div>
                         <div
-                          onClick={(curr) => {
+                          onClick={() => {
                             handleAddPlayer(curr);
                           }}
                           className="group-hover:visible invisible"
@@ -100,7 +104,7 @@ const ChooseteamMembers = () => {
                            <div>
                             {
                                 selected == true ? <div>
-                                    <Check className="text-indigo-500" strokeWidth={1.5} />
+                                    <Check className="text-indigo-500" strokeWidth={1.5} /> 
                                 </div> :  <Button
                                 className="bg-zinc-300 hover:text-white text-zinc-900 font-medium text-xs  h-8"
                                 size={"sm"}
