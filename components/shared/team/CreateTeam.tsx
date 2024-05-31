@@ -42,6 +42,7 @@ const CreateTeam = () => {
   const [teamCode, setteamCode] = useState<string>("");
   const [teamEmail, setteamEmail] = useState<string>('');
   const [teamLocation, setteamLocation] = useState<string>('')
+  const [SubmitLoading, setSubmitLoading] = useState<boolean>(false);
 
 
 
@@ -50,19 +51,24 @@ const CreateTeam = () => {
   
   const handleSubmit = async ()=>{
     try {
-      const curruser = localStorage.getItem('x-auth-user');
-        console.log(SelectedCategory.sportcategoryid);
+      setSubmitLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 5000);
+      
+      // const curruser = localStorage.getItem('x-auth-user');
+      //   console.log(SelectedCategory.sportcategoryid);
         
-        const data = await CreateTeamAction({
-          data:{
-            name:TeamName , teamEmail:teamEmail , locaton:teamLocation , logo:"https://img.freepik.com/free-vector/gradient-basketball-logo_52683-84312.jpg?size=338&ext=jpg&ga=GA1.1.34264412.1717027200&semt=ais_user" , teamcode:teamCode ,  categoryId:SelectedCategory.sportcategoryid , captainId:TeamCaptain.userid , caption:TeamMoto , players:SelectedPlayersHome , userid:+curruser!
-          }
-        });
-        if(data.status == 200){
-          toast.success("Team Created Successfully");
-        }else{
-          toast.error("Some unexpected happens , please try again later")
-        }
+      //   const data = await CreateTeamAction({
+      //     data:{
+      //       name:TeamName , teamEmail:teamEmail , locaton:teamLocation , logo:"https://img.freepik.com/free-vector/gradient-basketball-logo_52683-84312.jpg?size=338&ext=jpg&ga=GA1.1.34264412.1717027200&semt=ais_user" , teamcode:teamCode ,  categoryId:SelectedCategory.sportcategoryid , captainId:TeamCaptain.userid , caption:TeamMoto , players:SelectedPlayersHome , userid:+curruser!
+      //     }
+      //   });
+      //   if(data.status == 200){
+      //     toast.success("Team Created Successfully");
+      //   }else{
+      //     toast.error("Some unexpected happens , please try again later")
+      //   }
         
     } catch (error) {
       
@@ -250,7 +256,7 @@ const CreateTeam = () => {
             onChange={(e) => {
               setteamCode(e.target.value);
             }}
-            className="outline-none border-[1px] border-stone-700 bg-stone-800 w-full h-12 px-4 "
+            className="outline-none border-[1px] border-stone-700 bg-stone-800 w-full h-12 px-4  text-zinc-400"
             type="text"
             placeholder="Your team code"
           />
@@ -321,7 +327,7 @@ const CreateTeam = () => {
                   {/* right div */}
                   {ActiveCaptain && (
                     <div className="h-full w-1/2 flex items-center justify-center flex-col">
-                      <div className="h-20 w-20 rounded-full bg-zinc-700">
+                      <div className="h-12 w-12 rounded-full bg-zinc-700">
                         <Image
                           className="h-full w-full object-cover rounded-full"
                           src={ActiveCaptain.avatar}
@@ -373,7 +379,7 @@ const CreateTeam = () => {
             <div className="mt-4 relative">
               <h1 className="text-zinc-400 text-sm mt-4">Team Captain</h1>
 
-              <div className="h-20 w-20 mt-4 mb-2 peer bg-white rounded-full transition-all relative">
+              <div className="h-12 w-12 mt-4 mb-2 peer bg-white rounded-full transition-all relative">
                 <Image
                   className="h-full w-full rounded-full"
                   src={ActiveCaptain.avatar}
@@ -385,7 +391,7 @@ const CreateTeam = () => {
                   onClick={removeCaptain}
                   className="bg-zinc-800 bg-opacity-95 absolute p-[2px] flex items-center justify-center cursor-pointer rounded-full top-0 -right-0"
                 >
-                  <X className="text-red-400" size={20} strokeWidth={1.4} />
+                  <X className="text-red-400" size={12} strokeWidth={1.4} />
                 </div>
               </div>
               <div className="h-9  transition-all duration-150 w-24 flex justify-center items-center text-white bg-opacity-15  bg-zinc-600 rounded-full">
@@ -411,7 +417,7 @@ const CreateTeam = () => {
               <div className="mt-4 flex gap-4">
                 {SelectedPlayersHome.map((curr: any) => {
                   return (
-                    <div className="h-20 w-20 flex rounded-full items-center justify-center">
+                    <div className="h-12 w-12 flex rounded-full items-center justify-center">
                       <Image
                         className="h-full w-full rounded-full object-cover"
                         src={curr.avatar}
@@ -456,7 +462,13 @@ const CreateTeam = () => {
           {/* team location component end */}
 
           {/* form submit button start */}
-          <Button onClick={handleSubmit} className="w-full bg-green-400 text-zinc-900 mt-10 hover:text-zinc-400" >Create Team</Button>
+        <div className="w-full flex items-center justify-center" >
+        <Button onClick={handleSubmit} className={` bg-green-400 ${SubmitLoading ? "w-12 h-12 rounded-full" : "w-full"} text-zinc-900 mt-10 hover:text-zinc-900 hover:bg-green-500 transition-all`} >
+            {
+              SubmitLoading ? <Loader className="animate-spin" strokeWidth={2}  /> : 'Create Team'
+            }
+          </Button>
+        </div>
           {/* form submit button end */}
 
 
