@@ -33,6 +33,7 @@ export const CreateTeamAction = async ({ data }: createTeamParams) => {
                 location: data.locaton,
                 teamcode: data.teamcode,
                 ownerid: data.userid,
+                teamemail:data.teamEmail,
                 members: {
                     connect: { userid: data.userid }
                 }

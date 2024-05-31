@@ -33,6 +33,7 @@ export type createTeamParams = {
         teamcode:string
         categoryId:number
         userid:number
+        teamEmail: string
     }
 }
 

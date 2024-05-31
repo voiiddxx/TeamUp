@@ -57,6 +57,8 @@ model Team {
   teamcode String
   owneredby User @relation("createdTeam" , fields: [ownerid] , references: [userid])
   ownerid Int
+  teamemail String
+  
 }
 
 
