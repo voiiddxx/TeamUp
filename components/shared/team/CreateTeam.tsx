@@ -305,7 +305,23 @@ const CreateTeam = () => {
           </div>
 
           {/* add team members div start */}
-          <ChooseteamMembers slectedPlayerHome={SelectedPlayersHome} setSelectedPlayersHome={setSelectedPlayersHome} />
+         <div className="flex gap-4" >
+         <ChooseteamMembers slectedPlayerHome={SelectedPlayersHome} setSelectedPlayersHome={setSelectedPlayersHome} />
+
+{
+  SelectedPlayersHome.length > 0 && (
+    <div className="mt-4 flex gap-4" >
+      {
+        SelectedPlayersHome.map((curr:any)=>{
+          return <div className="h-20 w-20 flex rounded-full items-center justify-center" >
+            <Image className="h-full w-full rounded-full object-cover" src={curr.avatar} height={1500} width={1500} alt="user images"/>
+          </div>
+        })
+      }
+    </div>
+  )
+}
+         </div>
       
           
           {/* add team members div start end */}
