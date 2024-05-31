@@ -29,10 +29,10 @@ const DashboardnavBar = () => {
                 <Dumbbell size={25} strokeWidth={1.5} />
                 <p className='font-semibold' >Create Team</p>
             </Button></Link>
-            <Button className='bg-gradient-to-r from-green-400 to-green-200 flex gap-2 items-center text-zinc-900 ' >
+            <Link href={`/dashboard/match/create`} ><Button className='bg-gradient-to-r from-green-400 to-green-200 flex gap-2 items-center text-zinc-900 ' >
                 <Dices size={25} strokeWidth={1.5} />
                 <p className='font-semibold' >Create Matches</p>
-            </Button>
+            </Button></Link>
         </div>
         
     </div>

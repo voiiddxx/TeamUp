@@ -52,23 +52,21 @@ const CreateTeam = () => {
   const handleSubmit = async ()=>{
     try {
       setSubmitLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 5000);
-      
-      // const curruser = localStorage.getItem('x-auth-user');
-      //   console.log(SelectedCategory.sportcategoryid);
+      const curruser = localStorage.getItem('x-auth-user');
+        console.log(SelectedCategory.sportcategoryid);
         
-      //   const data = await CreateTeamAction({
-      //     data:{
-      //       name:TeamName , teamEmail:teamEmail , locaton:teamLocation , logo:"https://img.freepik.com/free-vector/gradient-basketball-logo_52683-84312.jpg?size=338&ext=jpg&ga=GA1.1.34264412.1717027200&semt=ais_user" , teamcode:teamCode ,  categoryId:SelectedCategory.sportcategoryid , captainId:TeamCaptain.userid , caption:TeamMoto , players:SelectedPlayersHome , userid:+curruser!
-      //     }
-      //   });
-      //   if(data.status == 200){
-      //     toast.success("Team Created Successfully");
-      //   }else{
-      //     toast.error("Some unexpected happens , please try again later")
-      //   }
+        const data = await CreateTeamAction({
+          data:{
+            name:TeamName , teamEmail:teamEmail , locaton:teamLocation , logo:"https://img.freepik.com/free-vector/gradient-basketball-logo_52683-84312.jpg?size=338&ext=jpg&ga=GA1.1.34264412.1717027200&semt=ais_user" , teamcode:teamCode ,  categoryId:SelectedCategory.sportcategoryid , captainId:TeamCaptain.userid , caption:TeamMoto , players:SelectedPlayersHome , userid:+curruser!
+          }
+        });
+        if(data.status == 200){
+          toast.success("Team Created Successfully");
+          setIsLoading(false);
+        }else{
+          toast.error("Some unexpected happens , please try again later")
+          setIsLoading(false);
+        }
         
     } catch (error) {
       
