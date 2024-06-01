@@ -20,6 +20,7 @@ const MatchInput = ({ Value, setValue, placeholderVal }: IMatchInputProps) => {
     }
   const onChangeMethod = (value: any) => {
     setValue(value);
+    placeholderVal = value;
   };
 
   return (

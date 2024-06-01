@@ -55,6 +55,12 @@ const CreateMatchForm = () => {
       console.log(error);
     }
   };
+
+
+  const handleSubmit = ()=>{
+    console.log(Bet , MatchLocatiom);
+    
+  }
   const [Category, setCategory] = useState<any>(null);
 
   useEffect(() => {
@@ -129,10 +135,29 @@ const CreateMatchForm = () => {
             key={1515}
             Value={MatchLocatiom}
             setValue={setMatchLocatiom}
-            placeholderVal="Please enter match location"
+            placeholderVal="Please Eneter Location"
           />
           </motion.div>
         )}
+
+        {
+          Step == 2 && (
+            <motion.div
+            initial={{opacity:0}}
+            animate={{opacity:1}}
+            transition={{duration:0.7 , ease:"easeIn"}} className="flex items-center justify-center flex-col"
+            >
+              <h1 className="text-green-400 text-3xl" >Confirm Submission.</h1>
+              <p className="text-zinc-500 text-center tracking-wider font-medium mt-5 text-sm" >Thanks for creating your match at <span className="text-green-400 underline" >TeamUp</span> , you will be notified <br /> through email if you got any competetior</p>
+
+              <p className="text-xs mt-8 font-light text-zinc-500" >Press Continue for Match Creation</p>
+
+              <Button onClick={handleSubmit} className="bg-green-400 text-zinc-950 hover:bg-green-200 mt-10 w-[400px] px-1" >Complete Submission</Button>
+
+              <p className="text-zinc-600 underline text-xs mt-2 hover:text-zinc-100 cursor-pointer" >Go back</p>
+            </motion.div>
+          )
+        }
       </div>
 
       {/* match form ends */}
