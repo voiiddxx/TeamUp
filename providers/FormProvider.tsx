@@ -1,33 +1,59 @@
+"use client"
+
+
+
 import { createContext, ReactNode, useContext, useState } from "react";
 
 
 
-const FormContext = createContext({});
+
+    interface IFormContext {
+        Step:number
+        nextStep: ()=> void
+        backStep:()=>void
+        customStep:(step:number)=>void
+    }
+
+    const defaultValue : IFormContext = {
+        Step:0,
+        nextStep() {
+            
+        },
+        backStep() {
+            
+        },
+        customStep(step) {
+            
+        },
+    }
+
+
+const FormContext = createContext<IFormContext>(defaultValue);
 
 interface IForm {
     children:ReactNode
 }
- export const FormProvider = ({children}:IForm)=>{
+
+ const FormProvider = ({children}:IForm)=>{
 
     const [Step, setStep] = useState<number>(0);
     
 
-    const next = ()=>{
+     const nextStep = ()=>{
         setStep(prev => prev+1);
     }
 
-    const back = ()=>{
+    const backStep = ()=>{
         setStep(prev => prev-1);
     }
 
-    const customstep = (step:number)=>{
+    const customStep = (step:number)=>{
         setStep(step);
     }
 
 
-    return <FormContext.Provider value={{Step , next , back , customstep}} >{children}</FormContext.Provider>
+    return <FormContext.Provider value={{Step , nextStep , backStep , customStep}} >{children}</FormContext.Provider>
 }
 
-export  function userFormState(){
-    return useContext(FormContext);
-}
+
+export {FormContext , FormProvider};
