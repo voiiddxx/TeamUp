@@ -21,7 +21,15 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import MatchInput from "./MatchInput";
 const CreateMatchForm = () => {
+
+
+  // all states //
+  const [Bet, setBet] = useState<number>(0);
+  // all states  end //
+
+
   const hanldeCreateMatch = async () => {
     try {
       const res = await CreateMatchAction({
@@ -87,12 +95,14 @@ const CreateMatchForm = () => {
       </div>
       {/* beard  starts end*/}
       {/* create match div starts from here */}
-      <div className="h-full w-full px-8">
-        <h1 className="text-green-300 mt-4 font-medium text-xl">
-          Create Match{" "}
-        </h1>
-      </div>
+      
       {/* create match div starts from here end */}
+
+      <div className="h-[600px] w-full flex items-center justify-center" >
+        <MatchInput Value={Bet} setValue={setBet} placeholderVal="Please Enter Bet Ammount"  />
+      </div>
+
+      
       {/* match form ends */}
     </div>
   );
