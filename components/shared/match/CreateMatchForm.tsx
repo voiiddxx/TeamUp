@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import MatchDetail from "./MatchDetail";
 import Matchdate from "./Matchdate";
 import ProgressBar from "./ProgressBar";
+import SelectTeam from "./SelectTeam";
 const CreateMatchForm = () => {
   const { Step , backStep ,customStep , nextStep } = useContext(FormContext);
 
@@ -26,6 +27,7 @@ const CreateMatchForm = () => {
   const [MatchLocatiom, setMatchLocatiom] = useState<string>("");
   const [Detail, setDetail] = useState<string>('');
   const [date, setDate] = React.useState<Date>()
+  const [IsLoading, setIsLoading] = useState<boolean>(false);
   // all states  end //
 
   const hanldeCreateMatch = async () => {
@@ -54,6 +56,7 @@ const CreateMatchForm = () => {
 
 
   const handleSubmit = ()=>{
+    setIsLoading(true);
     nextStep();
     console.log(Bet , MatchLocatiom , date , Detail);
     
@@ -99,7 +102,7 @@ const CreateMatchForm = () => {
         </Breadcrumb>
       </div>
 
-      <div className="mt-8 w-full flex items-center  px-20" >
+      <div className="mt-8 w-full flex items-center  px-20 justify-center" >
         <ProgressBar/>
       </div>
       {/* beard  starts end*/}
@@ -164,8 +167,19 @@ const CreateMatchForm = () => {
           </motion.div>
         )
       }
+      {
+        Step == 4 && (
+          <motion.div
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          transition={{duration:0.7 , ease:"easeIn"}}
+          >
+            <SelectTeam/>
+          </motion.div>
+        )
+      }
         {
-          Step >= 4 && (
+          Step >= 5 && (
             <motion.div
             initial={{opacity:0}}
             animate={{opacity:1}}

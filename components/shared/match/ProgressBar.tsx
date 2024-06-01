@@ -2,6 +2,7 @@ import { FormContext } from "@/providers/FormProvider";
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import {
+    Boxes,
   Calendar,
   CheckCheck,
   Feather,
@@ -15,12 +16,12 @@ import { cn } from "@/lib/utils";
 const ProgressBar = () => {
   const { Step, backStep, customStep, nextStep } = useContext(FormContext);
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center ">
       <div>
         <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
           <PiggyBank strokeWidth={1.5} size={20} className={`text-zinc-400`} />
         </div>
-        <p className="text-xs font-light text-zinc-400 mt-4 absolute">
+        <p className="text-xs font-light text-zinc-400 mt-5 absolute">
           Ammount
         </p>
       </div>
@@ -29,7 +30,7 @@ const ProgressBar = () => {
         <div className="flex items-center">
           <div
             className={cn(
-              "h-[1px] w-60 ",
+              "h-[1px] w-52 ",
               Step > 1 ? "bg-green-400" : "bg-stone-700"
             )}
           ></div>
@@ -51,7 +52,7 @@ const ProgressBar = () => {
             </div>
             <p
               className={cn(
-                "text-xs font-light mt-4 absolute",
+                "text-xs font-light mt-5 absolute",
                 Step > 1 ? "text-green-300" : "text-zinc-400 "
               )}
             >
@@ -64,7 +65,7 @@ const ProgressBar = () => {
         <div className="flex items-center">
           <div
             className={cn(
-              "h-[1px] w-60 ",
+              "h-[1px] w-52 ",
               Step > 2 ? "bg-green-400" : "bg-stone-700"
             )}
           ></div>
@@ -99,7 +100,7 @@ const ProgressBar = () => {
         <div className="flex items-center">
           <div
             className={cn(
-              "h-[1px] w-60 ",
+              "h-[1px] w-52 ",
               Step > 3 ? "bg-green-400" : "bg-stone-700"
             )}
           ></div>
@@ -135,7 +136,7 @@ const ProgressBar = () => {
         <div className="flex items-center">
           <div
             className={cn(
-              "h-[1px] w-60 ",
+              "h-[1px] w-52 ",
               Step > 4 ? "bg-green-400" : "bg-stone-700"
             )}
           ></div>
@@ -148,7 +149,7 @@ const ProgressBar = () => {
                   className={cn(Step > 4 ? "text-green-400" : "text-zinc-400")}
                 />
               ) : (
-                <Send
+                <Boxes
                   strokeWidth={1.5}
                   size={20}
                   className={cn(Step > 4 ? "text-green-400" : "text-zinc-400")}
@@ -159,6 +160,42 @@ const ProgressBar = () => {
               className={cn(
                 "text-xs font-light mt-4 absolute",
                 Step > 4 ? "text-green-300" : "text-zinc-400 "
+              )}
+            >
+              Team Selection
+            </p>
+          </div>
+        </div>
+      )}
+
+      {Step >= 5 && (
+        <div className="flex items-center">
+          <div
+            className={cn(
+              "h-[1px] w-52 ",
+              Step > 5 ? "bg-green-400" : "bg-stone-700"
+            )}
+          ></div>
+          <div>
+            <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
+              {Step > 5 ? (
+                <CheckCheck
+                  strokeWidth={1.5}
+                  size={20}
+                  className={cn(Step > 5 ? "text-green-400" : "text-zinc-400")}
+                />
+              ) : (
+                <Send
+                  strokeWidth={1.5}
+                  size={20}
+                  className={cn(Step > 5 ? "text-green-400" : "text-zinc-400")}
+                />
+              )}
+            </div>
+            <p
+              className={cn(
+                "text-xs font-light mt-5 absolute",
+                Step > 5 ? "text-green-300" : "text-zinc-400 "
               )}
             >
               Submission
