@@ -2,7 +2,7 @@
 
 import { Input } from "@/components/ui/input";
 import { getAllCategoryAction } from "@/lib/actions/category.action";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -22,11 +22,15 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import MatchInput from "./MatchInput";
+import { FormContext } from "@/providers/FormProvider";
 const CreateMatchForm = () => {
 
 
+    const {Step} = useContext(FormContext)
+
   // all states //
   const [Bet, setBet] = useState<number>(0);
+  const [MatchLocatiom, setMatchLocatiom] = useState<string>('')
   // all states  end //
 
 
@@ -95,11 +99,27 @@ const CreateMatchForm = () => {
       </div>
       {/* beard  starts end*/}
       {/* create match div starts from here */}
+
+    {/* create match progress bar component */}
+    
+    {/* create match progress bar component end */}
+
       
       {/* create match div starts from here end */}
 
       <div className="h-[600px] w-full flex items-center justify-center" >
-        <MatchInput Value={Bet} setValue={setBet} placeholderVal="Please Enter Bet Ammount"  />
+         {
+          Step == 0 && (
+            
+        <MatchInput   key={1515} Value={Bet} setValue={setBet} placeholderVal="Please Enter Bet Ammount"  />
+          )
+         }
+         {
+          Step == 1 && (
+            
+        <MatchInput  key={1515} Value={MatchLocatiom} setValue={setMatchLocatiom} placeholderVal="Please enter match location"  />
+          )
+         }
       </div>
 
       

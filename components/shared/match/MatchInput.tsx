@@ -26,7 +26,7 @@ const MatchInput = ({ Value, setValue, placeholderVal }: IMatchInputProps) => {
     <div className="w-full flex items-center justify-center">
       <div className="w-700px">
         <input
-          className="bg-stone-800 h-12 w-[700px] px-4 border-zinc-700 border text-white focus:outline-none"
+          className="bg-stone-800 focus:border-green-200 invalid:focus:border-red-300 h-12 w-[700px] px-4 border-zinc-700 border text-white focus:outline-none transition-all"
           onChange={(e) => {
             onChangeMethod(e.target.value);
           }}
