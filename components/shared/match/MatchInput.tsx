@@ -11,7 +11,13 @@ interface IMatchInputProps {
 
 const MatchInput = ({ Value, setValue, placeholderVal }: IMatchInputProps) => {
 
-    const {Step} = useContext(FormContext)
+    const {Step , nextStep , backStep} = useContext(FormContext)
+
+    const handleSubmit = ()=>{
+        nextStep();
+        console.log(Step);
+        
+    }
   const onChangeMethod = (value: any) => {
     setValue(value);
   };
@@ -28,7 +34,9 @@ const MatchInput = ({ Value, setValue, placeholderVal }: IMatchInputProps) => {
           placeholder={`${placeholderVal}`}
         />
         <div className="flex items-center justify-end mt-4 gap-2">
-          <Button className="bg-stone-800 group hover:bg-stone-800 hover:text-zinc-300  flex items-center justify-center">
+          <Button className="bg-stone-800 group hover:bg-stone-800 hover:text-zinc-300  flex items-center justify-center" onClick={()=>{
+            backStep();
+          }} >
             <ChevronLeft
               className="text-white transition-all group-hover:-translate-x-1"
               strokeWidth={1.75}
@@ -37,7 +45,7 @@ const MatchInput = ({ Value, setValue, placeholderVal }: IMatchInputProps) => {
             Back
           </Button>
 
-          <Button className="bg-green-400  hover:bg-green-300 group text-zinc-800 font-medium flex items-center justify-center">
+          <Button onClick={handleSubmit} className="bg-green-400  hover:bg-green-300 group text-zinc-800 font-medium flex items-center justify-center">
             Next Step
             <ChevronRight
               className="group-hover:translate-x-1 transition-all"
