@@ -24,6 +24,7 @@ import {
 import MatchInput from "./MatchInput";
 import { FormContext } from "@/providers/FormProvider";
 import { motion } from "framer-motion";
+import MatchDetail from "./MatchDetail";
 const CreateMatchForm = () => {
   const { Step } = useContext(FormContext);
 
@@ -139,9 +140,20 @@ const CreateMatchForm = () => {
           />
           </motion.div>
         )}
-
         {
           Step == 2 && (
+            <motion.div
+            initial={{opacity:0}}
+          animate={{opacity:1}}
+          transition={{duration:0.7 , ease:"easeIn"}}
+            >
+              <MatchDetail/>
+            </motion.div>
+          )
+        }
+
+        {
+          Step == 3 && (
             <motion.div
             initial={{opacity:0}}
             animate={{opacity:1}}

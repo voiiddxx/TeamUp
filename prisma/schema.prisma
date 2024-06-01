@@ -90,6 +90,7 @@ model Match {
   invites Invite[]
   owner User @relation(fields: [ownerid] , references: [userid])
   ownerid Int
+  detail String
 }
 
 
