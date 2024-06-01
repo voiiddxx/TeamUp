@@ -44,7 +44,9 @@ interface IForm {
     }
 
     const backStep = ()=>{
-        setStep(prev => prev-1);
+        if(Step>0){
+            setStep(prev => prev-1);
+        }
     }
 
     const customStep = (step:number)=>{
