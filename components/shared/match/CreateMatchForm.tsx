@@ -23,16 +23,14 @@ import {
 } from "@/components/ui/breadcrumb";
 import MatchInput from "./MatchInput";
 import { FormContext } from "@/providers/FormProvider";
+import { motion } from "framer-motion";
 const CreateMatchForm = () => {
-
-
-    const {Step} = useContext(FormContext)
+  const { Step } = useContext(FormContext);
 
   // all states //
   const [Bet, setBet] = useState<number>(0);
-  const [MatchLocatiom, setMatchLocatiom] = useState<string>('')
+  const [MatchLocatiom, setMatchLocatiom] = useState<string>("");
   // all states  end //
-
 
   const hanldeCreateMatch = async () => {
     try {
@@ -74,7 +72,7 @@ const CreateMatchForm = () => {
       <DashboardnavBar />
 
       {/* beard  starts */}
-      <div className="px-8 border-b border-zinc-800 py-3"   >
+      <div className="px-8 border-b border-zinc-800 py-3">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -100,29 +98,43 @@ const CreateMatchForm = () => {
       {/* beard  starts end*/}
       {/* create match div starts from here */}
 
-    {/* create match progress bar component */}
-    
-    {/* create match progress bar component end */}
+      {/* create match progress bar component */}
 
-      
+      {/* create match progress bar component end */}
+
       {/* create match div starts from here end */}
 
-      <div className="h-[600px] w-full flex items-center justify-center" >
-         {
-          Step == 0 && (
-            
-        <MatchInput   key={1515} Value={Bet} setValue={setBet} placeholderVal="Please Enter Bet Ammount"  />
-          )
-         }
-         {
-          Step == 1 && (
-            
-        <MatchInput  key={1515} Value={MatchLocatiom} setValue={setMatchLocatiom} placeholderVal="Please enter match location"  />
-          )
-         }
+      <div className="h-[600px] w-full flex items-center justify-center">
+        {Step == 0 && (
+          <motion.div 
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          transition={{duration:0.7 , ease:"easeIn"}}
+           >
+            <MatchInput
+              key={1515}
+              Value={Bet}
+              setValue={setBet}
+              placeholderVal="Please Enter Bet Ammount"
+            />
+          </motion.div>
+        )}
+        {Step == 1 && (
+          <motion.div
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          transition={{duration:0.7 , ease:"easeIn"}}
+          >
+            <MatchInput
+            key={1515}
+            Value={MatchLocatiom}
+            setValue={setMatchLocatiom}
+            placeholderVal="Please enter match location"
+          />
+          </motion.div>
+        )}
       </div>
 
-      
       {/* match form ends */}
     </div>
   );
