@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 
 
@@ -25,5 +25,9 @@ interface IForm {
     }
 
 
-    return <FormContext.Provider value={""} >{children}</FormContext.Provider>
+    return <FormContext.Provider value={{Step , next , back , customstep}} >{children}</FormContext.Provider>
+}
+
+export  function userFormState(){
+    return useContext(FormContext);
 }
