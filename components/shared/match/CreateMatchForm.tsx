@@ -28,6 +28,7 @@ const CreateMatchForm = () => {
   const [Detail, setDetail] = useState<string>('');
   const [date, setDate] = React.useState<Date>()
   const [IsLoading, setIsLoading] = useState<boolean>(false);
+  const [TeamId, setTeamId] = useState<any>(null);
   // all states  end //
 
   const hanldeCreateMatch = async () => {
@@ -174,7 +175,7 @@ const CreateMatchForm = () => {
           animate={{opacity:1}}
           transition={{duration:0.7 , ease:"easeIn"}}
           >
-            <SelectTeam/>
+            <SelectTeam setTeamid={setTeamId} teamId={TeamId} />
           </motion.div>
         )
       }
