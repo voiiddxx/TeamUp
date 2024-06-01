@@ -1,15 +1,6 @@
 "use client";
-
-import { Input } from "@/components/ui/input";
 import { getAllCategoryAction } from "@/lib/actions/category.action";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { CreateMatchAction } from "@/lib/actions/match.action";
 import { Button } from "@/components/ui/button";
 import DashboardnavBar from "../navbars/DashboardnavBar";
@@ -26,6 +17,7 @@ import { FormContext } from "@/providers/FormProvider";
 import { motion } from "framer-motion";
 import MatchDetail from "./MatchDetail";
 import Matchdate from "./Matchdate";
+import ProgressBar from "./ProgressBar";
 const CreateMatchForm = () => {
   const { Step , backStep ,customStep , nextStep } = useContext(FormContext);
 
@@ -104,6 +96,10 @@ const CreateMatchForm = () => {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
+      </div>
+
+      <div className="mt-8 w-full flex items-center  px-20" >
+        <ProgressBar/>
       </div>
       {/* beard  starts end*/}
       {/* create match div starts from here */}
