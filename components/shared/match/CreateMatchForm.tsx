@@ -27,7 +27,7 @@ import { motion } from "framer-motion";
 import MatchDetail from "./MatchDetail";
 import Matchdate from "./Matchdate";
 const CreateMatchForm = () => {
-  const { Step } = useContext(FormContext);
+  const { Step , backStep ,customStep , nextStep } = useContext(FormContext);
 
   // all states //
   const [Bet, setBet] = useState<number>(0);
@@ -181,7 +181,9 @@ const CreateMatchForm = () => {
 
               <Button onClick={handleSubmit} className="bg-green-400 text-zinc-950 hover:bg-green-200 mt-10 w-[400px] px-1" >Complete Submission</Button>
 
-              <p className="text-zinc-600 underline text-xs mt-2 hover:text-zinc-100 cursor-pointer" >Go back</p>
+              <p className="text-zinc-600 underline text-xs mt-2 hover:text-zinc-100 cursor-pointer" onClick={()=>{
+                backStep()
+              }} >Go back</p>
             </motion.div>
           )
         }
