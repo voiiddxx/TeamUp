@@ -25,12 +25,15 @@ import MatchInput from "./MatchInput";
 import { FormContext } from "@/providers/FormProvider";
 import { motion } from "framer-motion";
 import MatchDetail from "./MatchDetail";
+import Matchdate from "./Matchdate";
 const CreateMatchForm = () => {
   const { Step } = useContext(FormContext);
 
   // all states //
   const [Bet, setBet] = useState<number>(0);
   const [MatchLocatiom, setMatchLocatiom] = useState<string>("");
+  const [Detail, setDetail] = useState<string>('');
+  const [date, setDate] = React.useState<Date>()
   // all states  end //
 
   const hanldeCreateMatch = async () => {
@@ -147,13 +150,25 @@ const CreateMatchForm = () => {
           animate={{opacity:1}}
           transition={{duration:0.7 , ease:"easeIn"}}
             >
-              <MatchDetail/>
+              <MatchDetail Detail={Detail}  setDetail={setDetail} />
             </motion.div>
           )
         }
 
+
+      {
+        Step == 3 && (
+          <motion.div
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          transition={{duration:0.7 , ease:"easeIn"}}
+          >
+            <Matchdate date={date} setDate={setDate} />
+          </motion.div>
+        )
+      }
         {
-          Step == 3 && (
+          Step == 4 && (
             <motion.div
             initial={{opacity:0}}
             animate={{opacity:1}}
