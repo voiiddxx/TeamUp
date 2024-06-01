@@ -40,7 +40,9 @@ interface IForm {
     
 
      const nextStep = ()=>{
-        setStep(prev => prev+1);
+        if(Step<5){
+            setStep(prev => prev+1);
+        }
     }
 
     const backStep = ()=>{

@@ -54,7 +54,8 @@ const CreateMatchForm = () => {
 
 
   const handleSubmit = ()=>{
-    console.log(Bet , MatchLocatiom);
+    nextStep();
+    console.log(Bet , MatchLocatiom , date , Detail);
     
   }
   const [Category, setCategory] = useState<any>(null);
@@ -164,7 +165,7 @@ const CreateMatchForm = () => {
         )
       }
         {
-          Step == 4 && (
+          Step >= 4 && (
             <motion.div
             initial={{opacity:0}}
             animate={{opacity:1}}
