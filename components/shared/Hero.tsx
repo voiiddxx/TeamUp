@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 import { lusitiana } from "../ui/font";
+import MainNavBar from "./navbars/MainNavBar";
 
 type HeroPagePros = {
   clerkId: any;
@@ -29,8 +30,13 @@ const Hero = ({ clerkId }: HeroPagePros) => {
           <h1>This is the home screen</h1>
         </video>
 
-        <div className="h-screen w-full flex items-center justify-center z-10" >
-      <h1 className="text-xl text-white" >This Is TeamUp</h1>
+        <div className="h-screen w-full flex flex-col  z-10" >
+          <MainNavBar/>
+        <div className="h-full w-full flex items-center justify-center" >
+        <h1 className="text-8xl tracking-wide italic uppercase text-white font-bold text-center" >
+        Compete With Best  <br /> Now on <span className="text-red-500" >TeamUp</span>
+      </h1>
+        </div>
         </div>
 
       </div>
