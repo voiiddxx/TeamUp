@@ -24,18 +24,14 @@ const Hero = ({ clerkId }: HeroPagePros) => {
   }, []);
   return (
     <>  
-      <div className="h-screen w-full bg-white flex items-center justify-center">
-        {/* <iframe
-          className="h-screen bg-black w-[120%] right-30 absolute -left-52"
-          src="https://player.vimeo.com/video/923419451?api=1&background=1"
-        >hr
-        </iframe> */}
-        <div>
-          <Link href={`/dashboard`}  ><Button>Go to dashboard</Button></Link>
-        </div>
+      <div className="h-screen w-full bg-stone-950 flex items-center justify-center" >
+        <video className="h-full w-full object-cover brightness-[25%]" playsInline loop muted  src="https://assets-global.website-files.com/64e9425e335d3c7bcc2177c0%2F6657abbbb3e4dac40a4a6d33_IMG_0047%20%281%29-transcode.mp4" autoPlay ></video>
       </div>
     </>
   );
 };
 
 export default Hero;
+
+
+{/* <Link href={`/dashboard`}  ><Button>Go to dashboard</Button></Link> */}
