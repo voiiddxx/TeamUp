@@ -29,7 +29,7 @@ const CreateMatchForm = () => {
   const [Bet, setBet] = useState<number>(0);
   const [MatchLocatiom, setMatchLocatiom] = useState<string>("");
   const [Detail, setDetail] = useState<string>('');
-  const [date, setDate] = React.useState<Date>()
+  const [date, setDate] = React.useState<any>()
   const [IsLoading, setIsLoading] = useState<any>(false);
   const [TeamId, setTeamId] = useState<any>(null);
   // all states  end //
@@ -59,13 +59,26 @@ const CreateMatchForm = () => {
   };
 
 
-  const handleSubmit = ()=>{
+  const handleSubmit = async ()=>{
+    const userid = localStorage.getItem("x-auth-user");
     setIsLoading(true);
+      const res = await CreateMatchAction({
+        data:{
+          bet:Bet , categoryId:1 , createdTeamId:TeamId , date: date , location: MatchLocatiom , userid:+userid!
+        }
+      });
 
-    setTimeout(() => {
-      setIsLoading("Done")
-      nextStep(); 
-    }, 5000);
+      if(res){
+        console.log(res);
+        
+        setIsLoading(false);
+        if(res.status == 200){
+          setIsLoading("Done");
+          nextStep();
+        }else{
+          setIsLoading("Error");
+        }
+      }
     // nextStep();
     // console.log(Bet , MatchLocatiom , date , Detail , TeamId);
     
