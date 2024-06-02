@@ -42,6 +42,21 @@ const Hero = ({ clerkId }: HeroPagePros) => {
       <Button className="bg-red-500 text-lg tracking-wide flex items-center justify-center group hover:bg-red-500
        " >Register Now <ChevronRight className="text-white group-hover:translate-x-1 transition-all" strokeWidth={1.5} size={20} /> </Button>
       </div>
+
+
+      {/* scroll animation which loops */}
+      <div className="flex gap-12 animate-pulse  text-white mt-20" >
+        <h1>Cricket</h1>
+        <h1>Football</h1>
+        <h1>Basketball</h1>
+        <h1>Volleyball</h1>
+        <h1>KhoKho</h1>
+        <h1>Baseball</h1>
+        <h1>BasketBall</h1>
+        <h1>Rugby</h1>
+        <h1>Cricket</h1>
+      </div>
+      {/* scroll animation which loops end */}
         </div>
         </div>
 

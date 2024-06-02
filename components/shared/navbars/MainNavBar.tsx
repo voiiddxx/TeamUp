@@ -9,7 +9,7 @@ const MainNavBar = () => {
       <div className="h-full w-full flex justify-between px-20">
         {/* left div */}
         <div className="h-full flex items-center">
-          <p className="text-xl font-medium text-green-300 italic">TeamUp</p>
+          <p className="text-xl font-medium text-red-500 italic">TeamUp</p>
         </div>
         {/* mid div */}
         <div className="flex items-center gap-10 text-zinc-200">
