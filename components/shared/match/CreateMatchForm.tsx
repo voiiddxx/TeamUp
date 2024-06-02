@@ -19,6 +19,9 @@ import MatchDetail from "./MatchDetail";
 import Matchdate from "./Matchdate";
 import ProgressBar from "./ProgressBar";
 import SelectTeam from "./SelectTeam";
+import { cn } from "@/lib/utils";
+import { BadgeCheck, Loader, ThumbsUp } from "lucide-react";
+import Image from "next/image";
 const CreateMatchForm = () => {
   const { Step , backStep ,customStep , nextStep } = useContext(FormContext);
 
@@ -27,7 +30,7 @@ const CreateMatchForm = () => {
   const [MatchLocatiom, setMatchLocatiom] = useState<string>("");
   const [Detail, setDetail] = useState<string>('');
   const [date, setDate] = React.useState<Date>()
-  const [IsLoading, setIsLoading] = useState<boolean>(false);
+  const [IsLoading, setIsLoading] = useState<any>(false);
   const [TeamId, setTeamId] = useState<any>(null);
   // all states  end //
 
@@ -58,8 +61,13 @@ const CreateMatchForm = () => {
 
   const handleSubmit = ()=>{
     setIsLoading(true);
-    nextStep();
-    console.log(Bet , MatchLocatiom , date , Detail);
+
+    setTimeout(() => {
+      setIsLoading("Done")
+      nextStep(); 
+    }, 5000);
+    // nextStep();
+    // console.log(Bet , MatchLocatiom , date , Detail , TeamId);
     
   }
   const [Category, setCategory] = useState<any>(null);
@@ -180,7 +188,7 @@ const CreateMatchForm = () => {
         )
       }
         {
-          Step >= 5 && (
+          Step == 5 && (
             <motion.div
             initial={{opacity:0}}
             animate={{opacity:1}}
@@ -191,7 +199,11 @@ const CreateMatchForm = () => {
 
               <p className="text-xs mt-8 font-light text-zinc-500" >Press Continue for Match Creation</p>
 
-              <Button onClick={handleSubmit} className="bg-green-400 text-zinc-950 hover:bg-green-200 mt-10 w-[400px] px-1" >Complete Submission</Button>
+              <Button onClick={handleSubmit} className={cn("bg-green-400 text-zinc-950 transition-all hover:bg-green-200 mt-10 w-[400px] px-1 flex justify-center items-center" , IsLoading == true ? "w-[50px] h-[50px] rounded-full" : "w-[400px]")} >
+                {
+                  IsLoading == true ? <Loader className="text-zinc-900 animate-spin" strokeWidth={1.5} size={20} /> : 'Complete Submission'
+                }
+              </Button>
 
               <p className="text-zinc-600 underline text-xs mt-2 hover:text-zinc-100 cursor-pointer" onClick={()=>{
                 backStep()
@@ -199,6 +211,25 @@ const CreateMatchForm = () => {
             </motion.div>
           )
         }
+
+          {
+            IsLoading == "Done" && Step > 5 && (
+              <motion.div
+              initial={{opacity:0}}
+              animate={{opacity:1}}
+              transition={{duration:0.7 , ease:"easeIn"}}
+               className="flex items-center flex-col justify-center" >
+                
+              <ThumbsUp className="text-green-300" size={40} strokeWidth={1.5} />
+                <h1 className="text-4xl font-medium text-green-400 mt-4" >Success</h1>
+                <p className=" text-zinc-400 text-center text-xs tracking-wider leading-relaxed mt-4 font-light" >Your Match has been created with your selected Team and you can <br /> edit your matxh detail whenever you want and accept invite based on it</p>
+
+                <Button className="bg-green-400 text-zinc-900 mt-8" >Go back to Home Page</Button>
+                <p className="text-zinc-500 text-xs underline mt-2" >Your Profile</p>
+              </motion.div>
+            )
+          }
+
       </div>
 
       {/* match form ends */}

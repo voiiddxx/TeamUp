@@ -14,7 +14,7 @@ const MatchDetail = ( {Detail , setDetail}:IDetailProps) => {
     const {Step , backStep , customStep , nextStep} = useContext(FormContext);
   return (
     <div className='w-[700px] flex flex-col items-center justify-center' >
-        <textarea className='h-[200px] w-[700px] outline-none  bg-stone-800 border border-zinc-700 px-4 py-2 focus:border-green-500' onChange={(e)=>{
+        <textarea className='h-[200px] w-[700px] outline-none  bg-stone-800 border border-zinc-700 px-4 py-2 focus:border-green-500 text-zinc-300' onChange={(e)=>{
             setDetail(e.target.value)
         }} placeholder='Match Details | Rules | Guildlens : Note' ></textarea>
         <div className='w-full flex gap-2 mt-4 justify-end items-center' >

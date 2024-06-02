@@ -16,26 +16,37 @@ import { cn } from "@/lib/utils";
 const ProgressBar = () => {
   const { Step, backStep, customStep, nextStep } = useContext(FormContext);
   return (
-    <div className="flex items-center justify-center ">
-      <div>
-        <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
+    <motion.div initial={{opacity:0}}
+    animate={{opacity:1}}
+    transition={{duration:0.7 , ease:"easeIn"}} className="flex items-center justify-center ">
+      <motion.div 
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      transition={{duration:0.7 , ease:"easeIn"}}
+      >
+        <motion.div initial={{opacity:0}}
+            animate={{opacity:1}}
+            transition={{duration:0.7 , ease:"easeIn"}}
+             className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
           <PiggyBank strokeWidth={1.5} size={20} className={`text-zinc-400`} />
-        </div>
+        </motion.div>
         <p className="text-xs font-light text-zinc-400 mt-5 absolute">
           Ammount
         </p>
-      </div>
+      </motion.div>
 
       {Step >= 1 && (
-        <div className="flex items-center">
-          <div
+        <motion.div initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:0.7 , ease:"easeIn"}} className="flex items-center">
+          <motion.div
             className={cn(
               "h-[1px] w-52 ",
               Step > 1 ? "bg-green-400" : "bg-stone-700"
             )}
-          ></div>
-          <div>
-            <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
+          ></motion.div>
+          <motion.div>
+            <motion.div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
               {Step > 1 ? (
                 <CheckCheck
                   strokeWidth={1.5}
@@ -49,7 +60,7 @@ const ProgressBar = () => {
                   className={cn(Step > 1 ? "text-green-400" : "text-zinc-400")}
                 />
               )}
-            </div>
+            </motion.div>
             <p
               className={cn(
                 "text-xs font-light mt-5 absolute",
@@ -58,19 +69,21 @@ const ProgressBar = () => {
             >
               Location
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
       {Step >= 2 && (
-        <div className="flex items-center">
-          <div
+        <motion.div initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:0.7 , ease:"easeIn"}} className="flex items-center">
+          <motion.div
             className={cn(
               "h-[1px] w-52 ",
               Step > 2 ? "bg-green-400" : "bg-stone-700"
             )}
-          ></div>
-          <div>
-            <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
+          ></motion.div>
+          <motion.div>
+            <motion.div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
               {Step > 2 ? (
                 <CheckCheck
                   strokeWidth={1.5}
@@ -84,7 +97,7 @@ const ProgressBar = () => {
                   className={cn(Step > 2 ? "text-green-400" : "text-zinc-400")}
                 />
               )}
-            </div>
+            </motion.div>
             <p
               className={cn(
                 "text-xs font-light mt-2 absolute",
@@ -93,19 +106,21 @@ const ProgressBar = () => {
             >
               Details
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
       {Step >= 3 && (
-        <div className="flex items-center">
-          <div
+        <motion.div initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:0.7 , ease:"easeIn"}} className="flex items-center">
+          <motion.div
             className={cn(
               "h-[1px] w-52 ",
               Step > 3 ? "bg-green-400" : "bg-stone-700"
             )}
-          ></div>
-          <div>
-            <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
+          ></motion.div>
+          <motion.div>
+            <motion.div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
               {Step > 3 ? (
                 <CheckCheck
                   strokeWidth={1.5}
@@ -119,7 +134,7 @@ const ProgressBar = () => {
                   className={cn(Step > 3 ? "text-green-400" : "text-zinc-400")}
                 />
               )}
-            </div>
+            </motion.div>
             <p
               className={cn(
                 "text-xs font-light mt-3 absolute",
@@ -128,20 +143,22 @@ const ProgressBar = () => {
             >
               Date/Time
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
 
       {Step >= 4 && (
-        <div className="flex items-center">
-          <div
+        <motion.div initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:0.7 , ease:"easeIn"}} className="flex items-center">
+          <motion.div
             className={cn(
               "h-[1px] w-52 ",
               Step > 4 ? "bg-green-400" : "bg-stone-700"
             )}
-          ></div>
-          <div>
-            <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
+          ></motion.div>
+          <motion.div>
+            <motion.div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
               {Step > 4 ? (
                 <CheckCheck
                   strokeWidth={1.5}
@@ -155,7 +172,7 @@ const ProgressBar = () => {
                   className={cn(Step > 4 ? "text-green-400" : "text-zinc-400")}
                 />
               )}
-            </div>
+            </motion.div>
             <p
               className={cn(
                 "text-xs font-light mt-4 absolute",
@@ -164,20 +181,22 @@ const ProgressBar = () => {
             >
               Team Selection
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
 
       {Step >= 5 && (
-        <div className="flex items-center">
-          <div
+        <motion.div initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:0.7 , ease:"easeIn"}} className="flex items-center">
+          <motion.div
             className={cn(
               "h-[1px] w-52 ",
               Step > 5 ? "bg-green-400" : "bg-stone-700"
             )}
-          ></div>
-          <div>
-            <div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
+          ></motion.div>
+          <motion.div>
+            <motion.div className="h-10 w-10   border rounded-full flex justify-center items-center border-zinc-600">
               {Step > 5 ? (
                 <CheckCheck
                   strokeWidth={1.5}
@@ -191,7 +210,7 @@ const ProgressBar = () => {
                   className={cn(Step > 5 ? "text-green-400" : "text-zinc-400")}
                 />
               )}
-            </div>
+            </motion.div>
             <p
               className={cn(
                 "text-xs font-light mt-5 absolute",
@@ -200,10 +219,10 @@ const ProgressBar = () => {
             >
               Submission
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
