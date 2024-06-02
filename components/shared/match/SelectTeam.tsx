@@ -13,7 +13,9 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 const SelectTeam = ({setTeamid , teamId}:ITeamProps) => {
   const [teams, setteams] = useState<any>([]);
-  const [SelectedTeam, setSelectedTeam] = useState<any>();
+  const [SelectedTeam, setSelectedTeam] = useState<any>({
+    teamid:-1
+  });
   const res = [1,2,3,4]
 
 
@@ -58,10 +60,7 @@ const SelectTeam = ({setTeamid , teamId}:ITeamProps) => {
                   <div className="h-10 w-10 rounded-full bg-stone-700"></div>
   
                   <div>
-                    <p className="text-green-400 text-lg font-light" onClick={()=>{
-                      console.log("ths" , SelectedTeam.teamid , team.teamid);
-                      
-                    }}>
+                    <p className="text-green-400 text-lg font-light">
                       {team.name}
                     </p>
                   </div>
