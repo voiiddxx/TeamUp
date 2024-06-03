@@ -2,7 +2,7 @@
 
 
 import { getAllCategoryAction, GetCategoryWithId } from "@/lib/actions/category.action";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Dot } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const SideAllMatches = () => {
@@ -141,14 +141,27 @@ const SideAllMatches = () => {
               </div>  : <div className="flex gap-8 mt-5 flex-wrap" >
                 {
                   CategoryBasedResponse.match.map((curr:any)=>{
-                    return <div className="h-[250px] w-[400px] bg-white" >
-
+                    return <div className="h-[250px] w-[400px] bg-stone-900 bg-opacity-40 px-4 py-4" >
+                      <div className=" w-full flex justify-between items-center" > 
+                        <div>
+                        <p className="text-zinc-500" >
+                          {curr.time
+}
+                        </p>
+                        </div>
+                        <div className="flex items-center" >
+                          <Dot strokeWidth={5} absoluteStrokeWidth className="text-emerald-400" />
+                          <p className="text-emerald-400 font-light text-xs" >{curr.status}</p>
+                        </div>
+                      </div>
                     </div>
                   })
                 }
               </div>
             }
           </div>
+              
+          
            {/* all the  matches responses ends here */}
 
 
@@ -158,3 +171,6 @@ const SideAllMatches = () => {
 };
 
 export default SideAllMatches;
+
+
+
