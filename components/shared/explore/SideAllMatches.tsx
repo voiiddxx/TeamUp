@@ -4,7 +4,7 @@ import {
   getAllCategoryAction,
   GetCategoryWithId,
 } from "@/lib/actions/category.action";
-import { ArrowRight, ArrowUpRight, Dot } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronRightIcon, Dot } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const SideAllMatches = () => {
@@ -143,7 +143,7 @@ const SideAllMatches = () => {
             <div className="flex gap-8 mt-5 flex-wrap">
               {CategoryBasedResponse.match.map((curr: any) => {
                 return (
-                  <div className="h-[250px] w-[400px] bg-stone-900 bg-opacity-40 px-4 py-4">
+                  <div className=" w-[400px] bg-stone-900 bg-opacity-40 px-4 py-4">
                     <div className=" w-full flex justify-between items-center">
                       <div>
                         <p className="text-zinc-500">{curr.time}</p>
@@ -176,6 +176,21 @@ const SideAllMatches = () => {
                           <p className="text-lg text-white" >India</p>
                         </div>
 
+                      </div>
+
+
+                      {/* bet card */}
+                      <div className="flex items-center gap-1" >
+                      <p className="text-xs text-zinc-600" >Bet</p>
+                      <p className="text-2xl text-white" >2500</p>
+
+                      </div>
+                      {/* bet card end */}
+                      <div className="w-full flex justify-end" >
+                      <div className="flex gap-1 bg-stone-700 justify-center bg-opacity-40 px-2 items-center py-2 group cursor-pointer" >
+                      <p className="text-zinc-400 text-sm" >Chalange</p>
+                      <ChevronRightIcon className="text-zinc-400 group-hover:translate-x-1 transition-all" size={20} />
+                      </div>
                       </div>
                      </div>
                   </div>
