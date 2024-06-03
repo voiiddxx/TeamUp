@@ -8,24 +8,53 @@ import React, { useEffect, useState } from "react";
 const SideAllMatches = () => {
 
   const [Category, setCategory] = useState<any>(null);
+  const [Currentcategory, setCurrentcategory] = useState<any>(null);
+  const [CategoryBasedResponse, setCategoryBasedResponse] = useState<any>(null);
   
 
 
   useEffect(()=>{
-    // const getCategory = async ()=>{
-    //   const res = await getAllCategoryAction();
-    //   if(res){
-    //     console.log(res);
-    //     if(res.status == 200){
-    //       setCategory(res.data)
-    //     }else{
-    //       console.log("Some error occured");
-    //     }
+    const getCategory = async ()=>{
+      const res = await getAllCategoryAction();
+      if(res){
+        console.log(res);
+        if(res.status == 200){
+          setCategory(res.data)
+          setCurrentcategory(res.data[0].sportcategoryid)
+          console.log(res.data[0].sportcategoryid);
+          
+          
+        }else{
+          console.log("Some error occured");
+        }
         
-    //   }
-    // }
-    // getCategory();
-  } , [])
+      }
+    }
+    getCategory();
+  } , []);
+
+  useEffect(()=>{
+    const getCategoryBasedData = async()=>{
+     if(Currentcategory!=null){
+      const res = await GetCategoryWithId(Currentcategory);
+      if(res){
+        console.log("this is category based response",res);
+        if(res.status == 200){
+          setCategoryBasedResponse(res.data);
+          console.log(CategoryBasedResponse);
+          
+        }else{
+          console.log("Some unwanted error occured");
+          
+        }
+        
+      }
+     }
+    }
+    getCategoryBasedData();
+  } , [Currentcategory]);
+
+
     const res = [
         {
         name:"Football",
@@ -64,10 +93,12 @@ const SideAllMatches = () => {
                 </div>
               })
             }
-          </div> : <div className="flex" >
+          </div> : <div className="flex bg-stone-900 bg-opacity-45" >
           {
             res.map((curr:any)=>{
-                return <div className="flex justify-between gap-8 w-72 h-full px-1 group">
+                return <div onClick={()=>{
+                  setCurrentcategory(curr.sportcategoryid);
+                }} className="flex justify-between gap-8 w-72 h-full px-1 group">
                 <div className="h-full py-2 px-3 flex gap-4 items-center">
                   <div className="h-full w-2 rounded-md bg-zinc-200"></div>
                   <div>
@@ -90,7 +121,36 @@ const SideAllMatches = () => {
 
 
       {/* all the result based on the upperbar tap */}
-      <div>
+      <div className="mt-5" >
+          <h1 onClick={()=>{
+            console.log(CategoryBasedResponse);
+            
+          }} className="text-white" >Matches</h1>
+
+          {/* all the  matches responses */}
+          <div className="" >
+            {
+              CategoryBasedResponse=== null ? <div className="flex flex-wrap gap-8 mt-4" >
+                {
+                  res.map((curr:any)=>{
+                    return <div className="h-[250px] w-[350px] bg-stone-800 bg-opacity-50 animate-pulse" >
+
+                    </div> 
+                  })
+                }
+              </div>  : <div className="flex gap-8 mt-5 flex-wrap" >
+                {
+                  CategoryBasedResponse.match.map((curr:any)=>{
+                    return <div className="h-[250px] w-[400px] bg-white" >
+
+                    </div>
+                  })
+                }
+              </div>
+            }
+          </div>
+           {/* all the  matches responses ends here */}
+
 
       </div>
     </div>
