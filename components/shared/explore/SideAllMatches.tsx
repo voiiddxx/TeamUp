@@ -1,7 +1,31 @@
+"use client"
+
+
+import { getAllCategoryAction, GetCategoryWithId } from "@/lib/actions/category.action";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const SideAllMatches = () => {
+
+  const [Category, setCategory] = useState<any>(null);
+  
+
+
+  useEffect(()=>{
+    // const getCategory = async ()=>{
+    //   const res = await getAllCategoryAction();
+    //   if(res){
+    //     console.log(res);
+    //     if(res.status == 200){
+    //       setCategory(res.data)
+    //     }else{
+    //       console.log("Some error occured");
+    //     }
+        
+    //   }
+    // }
+    // getCategory();
+  } , [])
     const res = [
         {
         name:"Football",
@@ -21,15 +45,29 @@ const SideAllMatches = () => {
         match:2
     },
 ]
+
+
+
+
   return (
-    <div className="h-full w-full  px-7 py-8">
+    <div className="h-full   px-7 py-8">
       {/* upper component fot the sidebar */}
 
-      <div className="h-20 w-full bg-zinc-700 rounded-md bg-opacity-20 flex gap-4">
+      <div className="h-20 w-full  rounded-md bg-opacity-20 flex gap-4">
         {/* upper cards */}
         {
+          Category == null ? <div className="flex gap-3" >
+            {
+              res.map((curr:any)=>{
+                return <div className="h-16 w-[17rem] bg-stone-900 animate-pulse" >
+
+                </div>
+              })
+            }
+          </div> : <div className="flex" >
+          {
             res.map((curr:any)=>{
-                return <div className="flex justify-between gap-8 w-80 h-full ">
+                return <div className="flex justify-between gap-8 w-72 h-full px-1 group">
                 <div className="h-full py-2 px-3 flex gap-4 items-center">
                   <div className="h-full w-2 rounded-md bg-zinc-200"></div>
                   <div>
@@ -41,11 +79,19 @@ const SideAllMatches = () => {
                 </div>
       
                 <div>
-                  <ArrowUpRight className="text-zinc-500 mt-4" />
+                  <ArrowUpRight className="text-zinc-500 mt-4 group-hover:translate-x-1 transition-all" strokeWidth={1.5} />
                 </div>
               </div>
             })
         }
+          </div>
+        }
+      </div>
+
+
+      {/* all the result based on the upperbar tap */}
+      <div>
+
       </div>
     </div>
   );

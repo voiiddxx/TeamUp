@@ -38,7 +38,7 @@ const Hero = ({ clerkId }: HeroPagePros) => {
         Compete With Best  <br /> Now on <span className="text-red-500" >TeamUp</span>
       </h1>
       <div className="w-full flex justify-center items-center gap-2" >
-      <Button className="bg-transparent border border-white tracking-wide  text-lg flex hover:bg-transparent hover:scale-105 transition-all">Go to the Dashboard</Button>
+  <Link href={`/dashboard`} >    <Button className="bg-transparent border border-white tracking-wide  text-lg flex hover:bg-transparent hover:scale-105 transition-all">Go to the Dashboard</Button></Link>
       <Button className="bg-red-500 text-lg tracking-wide flex items-center justify-center group hover:bg-red-500
        " >Register Now <ChevronRight className="text-white group-hover:translate-x-1 transition-all" strokeWidth={1.5} size={20} /> </Button>
       </div>

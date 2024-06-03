@@ -79,8 +79,6 @@ const CreateMatchForm = () => {
           setIsLoading("Error");
         }
       }
-    // nextStep();
-    // console.log(Bet , MatchLocatiom , date , Detail , TeamId);
     
   }
   const [Category, setCategory] = useState<any>(null);
