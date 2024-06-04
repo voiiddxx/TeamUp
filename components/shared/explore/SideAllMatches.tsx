@@ -8,9 +8,11 @@ import { ArrowRight, ArrowUpRight, ChevronRightIcon, Dot } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 const SideAllMatches = () => {
+
   const [Category, setCategory] = useState<any>(null);
   const [Currentcategory, setCurrentcategory] = useState<any>(null);
   const [CategoryBasedResponse, setCategoryBasedResponse] = useState<any>(null);
+  const [CurrentMatch, setCurrentMatch] = useState<any>(null);
 
   useEffect(() => {
     const getCategory = async () => {
@@ -187,7 +189,10 @@ const SideAllMatches = () => {
                       </div>
                       {/* bet card end */}
                       <div className="w-full flex justify-end" >
-                      <div className="flex gap-1 bg-stone-700 justify-center bg-opacity-40 px-2 items-center py-2 group cursor-pointer" >
+                      <div onClick={()=>{
+                        setCurrentMatch(curr);
+                        console.log(CurrentMatch);
+                      }} className="flex gap-1 bg-stone-700 justify-center bg-opacity-40 px-2 items-center py-2 group cursor-pointer" >
                       <p className="text-zinc-400 text-sm" >Chalange</p>
                       <ChevronRightIcon className="text-zinc-400 group-hover:translate-x-1 transition-all" size={20} />
                       </div>
