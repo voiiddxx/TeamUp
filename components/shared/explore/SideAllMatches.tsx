@@ -215,7 +215,7 @@ const SideAllMatches = () => {
           CurrentMatch && (
             <motion.div initial={{opacity:0}}
             animate={{opacity:1}}
-            transition={{duration:0.7, ease: 'linear'}}
+            transition={{duration:0.1, ease: 'linear'}}
              >
                <ChalangeMatch  currentState={CurrentMatch} setCurrentState={setCurrentMatch}  matchData={CurrentMatch} />
             </motion.div>
